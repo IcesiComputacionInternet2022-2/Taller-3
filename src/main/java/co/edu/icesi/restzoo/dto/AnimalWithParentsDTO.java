@@ -1,6 +1,7 @@
 package co.edu.icesi.restzoo.dto;
 
 import co.edu.icesi.restzoo.constant.Constants;
+import co.edu.icesi.restzoo.model.Animal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalDTO {
-
+public class AnimalWithParentsDTO {
     @NotNull(message = Constants.NULL_FIELD)
     private UUID id;
 
@@ -45,4 +45,10 @@ public class AnimalDTO {
     @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime arrivalDate;
+
+    @NotNull(message = Constants.NULL_FIELD)
+    private Animal father;
+
+    @NotNull(message = Constants.NULL_FIELD)
+    private Animal mother;
 }
