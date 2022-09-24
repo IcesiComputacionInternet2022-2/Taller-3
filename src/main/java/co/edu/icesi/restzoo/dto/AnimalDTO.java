@@ -1,12 +1,10 @@
 package co.edu.icesi.restzoo.dto;
 
-import co.edu.icesi.restzoo.constant.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -23,9 +21,9 @@ public class AnimalDTO {
 
     private double weight;
 
-    private int age;
+    private double age;
 
-    private double height;
+    private double length;
 
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
     private LocalDateTime arrivalDate;

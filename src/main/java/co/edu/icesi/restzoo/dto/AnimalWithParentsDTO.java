@@ -22,7 +22,7 @@ public class AnimalWithParentsDTO {
 
     private double weight;
 
-    private int age;
+    private double age;
 
     private double height;
 

@@ -12,13 +12,13 @@
             <column name="animal_sex" type="varchar(1)">
                 <constraints nullable="false"/>
             </column>
-            <column name="animal_weight" type="numeric(16,8)">
+            <column name="animal_weight" type="numeric(12,4)">
                 <constraints nullable="false"/>
             </column>
-            <column name="animal_age" type="integer">
+            <column name="animal_age" type="numeric(5,3)">
                 <constraints nullable="false"/>
             </column>
-            <column name="animal_height" type="numeric(16,8)">
+            <column name="animal_height" type="numeric(12,4)">
                 <constraints nullable="false"/>
             </column>
             <column name="arrival_date" type="date">
