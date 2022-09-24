@@ -27,10 +27,10 @@ public class Animal {
     private UUID id;
     private String name;
     private char sex;
-    private float weight;
+    private double weight;
     private int age;
-    private float height;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private double height;
+    @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
     private LocalDateTime arrivalDate;
 
     @PrePersist

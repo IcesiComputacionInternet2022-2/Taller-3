@@ -11,6 +11,8 @@ public interface AnimalService {
 
     Animal getAnimal(@PathVariable UUID animalId);
 
+    Animal getAnimal(@PathVariable String animalName);
+
     Animal createAnimal(@RequestBody Animal animal);
 
     List<Animal> getAnimals();

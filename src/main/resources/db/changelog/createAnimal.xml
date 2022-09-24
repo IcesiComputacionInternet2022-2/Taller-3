@@ -9,7 +9,7 @@
             <column name="animal_name" type="varchar(60)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="animal_sex" type="char(1)">
+            <column name="animal_sex" type="varchar(1)">
                 <constraints nullable="false"/>
             </column>
             <column name="animal_weight" type="numeric(16,8)">

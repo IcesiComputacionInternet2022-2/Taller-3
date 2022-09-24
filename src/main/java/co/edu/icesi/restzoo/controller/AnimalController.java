@@ -20,8 +20,13 @@ public class AnimalController implements AnimalAPI {
     public final AnimalService animalService;
 
     @Override
-    public AnimalDTO getAnimal(UUID animalId) {
+    public AnimalDTO getAnimalById(UUID animalId) {
         return animalMapper.fromAnimal(animalService.getAnimal(animalId));
+    }
+
+    @Override
+    public AnimalDTO getAnimalByName(String animalName) {
+        return animalMapper.fromAnimal(animalService.getAnimal(animalName));
     }
 
     @Override
