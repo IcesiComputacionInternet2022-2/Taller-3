@@ -11,4 +11,6 @@ import java.util.UUID;
 @Repository
 public interface ZooRepository extends CrudRepository<Animal, UUID> {
     Optional<Animal> findByName(String name);
+
+    Animal getAnimalById(UUID id);
 }

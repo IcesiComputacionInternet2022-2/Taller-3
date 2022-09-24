@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -29,7 +30,8 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public Animal createAnimal(Animal animal) {
-        uniqueExhibit(animal.getName());
+        uniqueAnimalName(animal.getName());
+        dateIsInThePast(animal.getArrivalDate());
         return zooRepository.save(animal);
     }
 
@@ -38,9 +40,36 @@ public class AnimalServiceImpl implements AnimalService {
         return StreamSupport.stream(zooRepository.findAll().spliterator(),false).collect(Collectors.toList());
     }
 
-    private void uniqueExhibit(String name) {
+    private void uniqueAnimalName(String name) {
         if (zooRepository.findByName(name).isPresent())
             throw new AnimalException(HttpStatus.CONFLICT,
                     new AnimalError(AnimalErrorCode.SER_E0x01, AnimalErrorCode.SER_E0x01.getMessage()));
+    }
+
+    private void parentsValidations(Animal animal) {
+        /*Todo: Find a way to reference parents on create,
+        *  Nest parent validations (should be below) within an if*/
+
+    }
+
+    private void parentsExist(UUID father, UUID mother) {
+        if (!zooRepository.existsById(father))
+            throw new AnimalException(HttpStatus.NOT_FOUND,
+                    new AnimalError(AnimalErrorCode.SER_E0x02_1, AnimalErrorCode.SER_E0x02_1.getMessage()));
+        if (!zooRepository.existsById(mother))
+            throw new AnimalException(HttpStatus.NOT_FOUND,
+                    new AnimalError(AnimalErrorCode.SER_E0x02_2, AnimalErrorCode.SER_E0x02_2.getMessage()));
+    }
+
+    private void parentsSexMatch(UUID father, UUID mother) {
+        if (zooRepository.getAnimalById(father).getSex() != 'M' || zooRepository.getAnimalById(mother).getSex() != 'F')
+            throw new AnimalException(HttpStatus.BAD_REQUEST,
+                    new AnimalError(AnimalErrorCode.SER_E0x03, AnimalErrorCode.SER_E0x03.getMessage()));
+    }
+
+    private void dateIsInThePast(LocalDateTime arrivalDate) {
+        if (arrivalDate.isAfter(LocalDateTime.now()))
+            throw new AnimalException(HttpStatus.BAD_REQUEST,
+                    new AnimalError(AnimalErrorCode.SER_E0x04, AnimalErrorCode.SER_E0x04.getMessage()));
     }
 }
