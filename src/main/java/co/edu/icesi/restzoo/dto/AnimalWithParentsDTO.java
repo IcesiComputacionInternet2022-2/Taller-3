@@ -1,13 +1,10 @@
 package co.edu.icesi.restzoo.dto;
 
-import co.edu.icesi.restzoo.model.Animal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data

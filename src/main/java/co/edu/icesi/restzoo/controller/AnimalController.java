@@ -8,7 +8,6 @@ import co.edu.icesi.restzoo.dto.AnimalWithParentsDTO;
 import co.edu.icesi.restzoo.error.exception.AnimalError;
 import co.edu.icesi.restzoo.error.exception.AnimalException;
 import co.edu.icesi.restzoo.mapper.AnimalMapper;
-import co.edu.icesi.restzoo.model.Animal;
 import co.edu.icesi.restzoo.service.AnimalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

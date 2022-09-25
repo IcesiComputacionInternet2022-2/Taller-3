@@ -27,15 +27,6 @@ public interface AnimalMapper {
     @Mapping(source = "mother", target = "mother")
     AnimalWithParentsDTO fromAnimals(Animal child, UUID father, UUID mother);
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "sex", target = "sex")
-    @Mapping(source = "weight", target = "weight")
-    @Mapping(source = "age", target = "age")
-    @Mapping(source = "length", target = "length")
-    @Mapping(source = "arrivalDate", target = "arrivalDate")
-    AnimalDTO fromParentsDTO(AnimalWithParentsDTO animalWithParentsDTO);
-
     default String fromUUID(UUID uuid) { return uuid.toString(); }
 
     default UUID fromUUID(String uuid) { return UUID.fromString(uuid); }
