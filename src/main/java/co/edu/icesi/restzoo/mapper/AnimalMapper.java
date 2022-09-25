@@ -1,7 +1,6 @@
 package co.edu.icesi.restzoo.mapper;
 
 import co.edu.icesi.restzoo.dto.AnimalDTO;
-import co.edu.icesi.restzoo.dto.AnimalWithParentsDTO;
 import co.edu.icesi.restzoo.model.Animal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,7 +12,6 @@ public interface AnimalMapper {
 
     Animal fromDTO(AnimalDTO animalDTO);
 
-    Animal fromDTO(AnimalWithParentsDTO animalWithParentsDTO);
     AnimalDTO fromAnimal(Animal animal);
 
     @Mapping(source = "child.id", target = "id")
@@ -25,7 +23,7 @@ public interface AnimalMapper {
     @Mapping(source = "child.arrivalDate", target = "arrivalDate")
     @Mapping(source = "father", target = "father")
     @Mapping(source = "mother", target = "mother")
-    AnimalWithParentsDTO fromAnimals(Animal child, UUID father, UUID mother);
+    AnimalDTO fromAnimals(Animal child, UUID father, UUID mother);
 
     default String fromUUID(UUID uuid) { return uuid.toString(); }
 

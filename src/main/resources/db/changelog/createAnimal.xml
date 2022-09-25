@@ -24,11 +24,11 @@
             <column name="arrival_date" type="date">
                 <constraints nullable="false" checkConstraint="sysdate >= arrival_date"/>
             </column>
-            <column name="father" type="UUID">
-                <constraints nullable="true"/>
+            <column name="father" type="varchar(32)">
+                <constraints nullable="false"/>
             </column>
-            <column name="mother" type="UUID">
-                <constraints nullable="true"/>
+            <column name="mother" type="varchar(32)">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

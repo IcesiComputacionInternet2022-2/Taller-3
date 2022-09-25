@@ -4,7 +4,6 @@ import co.edu.icesi.restzoo.api.AnimalAPI;
 import co.edu.icesi.restzoo.constant.AnimalErrorCode;
 import co.edu.icesi.restzoo.constant.Constants;
 import co.edu.icesi.restzoo.dto.AnimalDTO;
-import co.edu.icesi.restzoo.dto.AnimalWithParentsDTO;
 import co.edu.icesi.restzoo.error.exception.AnimalError;
 import co.edu.icesi.restzoo.error.exception.AnimalException;
 import co.edu.icesi.restzoo.mapper.AnimalMapper;
@@ -45,12 +44,6 @@ public class AnimalController implements AnimalAPI {
         return animalMapper.fromAnimal(animalService.createAnimal(animalMapper.fromDTO(animalDTO)));
     }
 
-    @Override
-    public AnimalWithParentsDTO createAnimal(AnimalWithParentsDTO animalDTO) {
-        validateAnimal(animalDTO);
-        return animalMapper.fromAnimals(animalService.createAnimal(animalMapper.fromDTO(animalDTO)),
-                animalDTO.getFather(), animalDTO.getMother());
-    }
 
     @Override
     public List<AnimalDTO> getAnimals() {
@@ -67,7 +60,13 @@ public class AnimalController implements AnimalAPI {
         babyLengthFloor(animalDTO.getLength());
         elderLengthCeil(animalDTO.getLength());
 
-        if (animalDTO instanceof AnimalWithParentsDTO) parentsValidations((AnimalWithParentsDTO) animalDTO);
+        if (animalDTO.getFather() != null ||
+                animalDTO.getMother() != null)
+            parentsValidations(animalDTO);
+        else {
+            animalDTO.setFather(Constants.NO_FATHER.getValue());
+            animalDTO.setMother(Constants.NO_MOTHER.getValue());
+        }
     }
 
     private void validNameFormat(String name) {
@@ -118,12 +117,19 @@ public class AnimalController implements AnimalAPI {
                     new AnimalError(AnimalErrorCode.CRL_E0x16_2, AnimalErrorCode.CRL_E0x16_2.getMessage()));
     }
 
-    private void parentsValidations(AnimalWithParentsDTO animalDTO) {
+    private void parentsValidations(AnimalDTO animalDTO) {
+        exactlyTwoParents(animalDTO);
         parentsExist(animalDTO.getFather(), animalDTO.getMother());
         parentsSexMatch(animalDTO.getFather(), animalDTO.getMother());
     }
 
-    private void parentsExist(UUID father, UUID mother) {
+    private void exactlyTwoParents(AnimalDTO animalDTO) {
+        if (animalDTO.getFather() == null || animalDTO.getMother() == null)
+            throw new AnimalException(HttpStatus.NOT_ACCEPTABLE,
+                    new AnimalError(AnimalErrorCode.SER_E0x02_3, AnimalErrorCode.SER_E0x02_3.getMessage()));
+    }
+
+    private void parentsExist(String father, String mother) {
         if (animalService.getAnimal(father) == null)
             throw new AnimalException(HttpStatus.NOT_FOUND,
                     new AnimalError(AnimalErrorCode.SER_E0x02_1, AnimalErrorCode.SER_E0x02_1.getMessage()));
@@ -132,7 +138,7 @@ public class AnimalController implements AnimalAPI {
                     new AnimalError(AnimalErrorCode.SER_E0x02_2, AnimalErrorCode.SER_E0x02_2.getMessage()));
     }
 
-    private void parentsSexMatch(UUID father, UUID mother) {
+    private void parentsSexMatch(String father, String mother) {
         if (animalService.getAnimal(father).getSex() != 'M' || animalService.getAnimal(mother).getSex() != 'F')
             throw new AnimalException(HttpStatus.BAD_REQUEST,
                     new AnimalError(AnimalErrorCode.SER_E0x03, AnimalErrorCode.SER_E0x03.getMessage()));

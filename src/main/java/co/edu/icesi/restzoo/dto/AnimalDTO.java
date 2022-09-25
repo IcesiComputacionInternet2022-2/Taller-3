@@ -27,4 +27,8 @@ public class AnimalDTO {
 
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
     protected LocalDateTime arrivalDate;
+
+    protected String father;
+
+    protected String mother;
 }

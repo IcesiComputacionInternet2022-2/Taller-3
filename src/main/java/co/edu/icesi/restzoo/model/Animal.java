@@ -32,6 +32,8 @@ public class Animal {
     private double length;
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
     private LocalDateTime arrivalDate;
+    private String father;
+    private String mother;
 
     @PrePersist
     public void generateId(){
