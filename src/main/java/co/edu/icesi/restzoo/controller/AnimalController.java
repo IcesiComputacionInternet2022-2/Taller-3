@@ -130,10 +130,10 @@ public class AnimalController implements AnimalAPI {
     }
 
     private void parentsExist(String father, String mother) {
-        if (animalService.getAnimal(father) == null)
+        if (animalService.getAnimal(animalService.getAnimal(father).getId()) == null)
             throw new AnimalException(HttpStatus.NOT_FOUND,
                     new AnimalError(AnimalErrorCode.SER_E0x02_1, AnimalErrorCode.SER_E0x02_1.getMessage()));
-        if (animalService.getAnimal(mother) == null)
+        if (animalService.getAnimal(animalService.getAnimal(mother).getId()) == null)
             throw new AnimalException(HttpStatus.NOT_FOUND,
                     new AnimalError(AnimalErrorCode.SER_E0x02_2, AnimalErrorCode.SER_E0x02_2.getMessage()));
     }
