@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.lang.annotation.Inherited;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,18 +14,18 @@ import java.util.UUID;
 @NoArgsConstructor
 public class AnimalDTO {
 
-    private UUID id;
+    protected UUID id;
 
-    private String name;
+    protected String name;
 
-    private char sex;
+    protected char sex;
 
-    private double weight;
+    protected double weight;
 
-    private double age;
+    protected double age;
 
-    private double length;
+    protected double length;
 
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
-    private LocalDateTime arrivalDate;
+    protected LocalDateTime arrivalDate;
 }

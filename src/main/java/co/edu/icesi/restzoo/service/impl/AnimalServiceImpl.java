@@ -46,27 +46,6 @@ public class AnimalServiceImpl implements AnimalService {
                     new AnimalError(AnimalErrorCode.SER_E0x01, AnimalErrorCode.SER_E0x01.getMessage()));
     }
 
-    private void parentsValidations(Animal animal) {
-        /*Todo: Find a way to reference parents on create,
-        *  Nest parent validations (should be below) within an if*/
-
-    }
-
-    private void parentsExist(UUID father, UUID mother) {
-        if (!zooRepository.existsById(father))
-            throw new AnimalException(HttpStatus.NOT_FOUND,
-                    new AnimalError(AnimalErrorCode.SER_E0x02_1, AnimalErrorCode.SER_E0x02_1.getMessage()));
-        if (!zooRepository.existsById(mother))
-            throw new AnimalException(HttpStatus.NOT_FOUND,
-                    new AnimalError(AnimalErrorCode.SER_E0x02_2, AnimalErrorCode.SER_E0x02_2.getMessage()));
-    }
-
-    private void parentsSexMatch(UUID father, UUID mother) {
-        if (zooRepository.getAnimalById(father).getSex() != 'M' || zooRepository.getAnimalById(mother).getSex() != 'F')
-            throw new AnimalException(HttpStatus.BAD_REQUEST,
-                    new AnimalError(AnimalErrorCode.SER_E0x03, AnimalErrorCode.SER_E0x03.getMessage()));
-    }
-
     private void dateIsInThePast(LocalDateTime arrivalDate) {
         if (arrivalDate.isAfter(LocalDateTime.now()))
             throw new AnimalException(HttpStatus.BAD_REQUEST,

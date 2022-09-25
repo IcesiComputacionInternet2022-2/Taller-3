@@ -12,6 +12,8 @@ import java.util.UUID;
 public interface AnimalMapper {
 
     Animal fromDTO(AnimalDTO animalDTO);
+
+    Animal fromDTO(AnimalWithParentsDTO animalWithParentsDTO);
     AnimalDTO fromAnimal(Animal animal);
 
     @Mapping(source = "child.id", target = "id")
@@ -19,11 +21,20 @@ public interface AnimalMapper {
     @Mapping(source = "child.sex", target = "sex")
     @Mapping(source = "child.weight", target = "weight")
     @Mapping(source = "child.age", target = "age")
-    @Mapping(source = "child.height", target = "height")
+    @Mapping(source = "child.length", target = "length")
     @Mapping(source = "child.arrivalDate", target = "arrivalDate")
     @Mapping(source = "father", target = "father")
     @Mapping(source = "mother", target = "mother")
-    AnimalWithParentsDTO fromAnimals(Animal child, Animal father, Animal mother);
+    AnimalWithParentsDTO fromAnimals(Animal child, UUID father, UUID mother);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "sex", target = "sex")
+    @Mapping(source = "weight", target = "weight")
+    @Mapping(source = "age", target = "age")
+    @Mapping(source = "length", target = "length")
+    @Mapping(source = "arrivalDate", target = "arrivalDate")
+    AnimalDTO fromParentsDTO(AnimalWithParentsDTO animalWithParentsDTO);
 
     default String fromUUID(UUID uuid) { return uuid.toString(); }
 

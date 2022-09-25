@@ -4,9 +4,11 @@ import co.edu.icesi.restzoo.api.AnimalAPI;
 import co.edu.icesi.restzoo.constant.AnimalErrorCode;
 import co.edu.icesi.restzoo.constant.Constants;
 import co.edu.icesi.restzoo.dto.AnimalDTO;
+import co.edu.icesi.restzoo.dto.AnimalWithParentsDTO;
 import co.edu.icesi.restzoo.error.exception.AnimalError;
 import co.edu.icesi.restzoo.error.exception.AnimalException;
 import co.edu.icesi.restzoo.mapper.AnimalMapper;
+import co.edu.icesi.restzoo.model.Animal;
 import co.edu.icesi.restzoo.service.AnimalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,23 @@ public class AnimalController implements AnimalAPI {
 
     @Override
     public AnimalDTO createAnimal(AnimalDTO animalDTO) {
+        validateAnimal(animalDTO);
+        return animalMapper.fromAnimal(animalService.createAnimal(animalMapper.fromDTO(animalDTO)));
+    }
+
+    @Override
+    public AnimalWithParentsDTO createAnimal(AnimalWithParentsDTO animalDTO) {
+        validateAnimal(animalDTO);
+        return animalMapper.fromAnimals(animalService.createAnimal(animalMapper.fromDTO(animalDTO)),
+                animalDTO.getFather(), animalDTO.getMother());
+    }
+
+    @Override
+    public List<AnimalDTO> getAnimals() {
+        return animalService.getAnimals().stream().map(animalMapper::fromAnimal).collect(Collectors.toList());
+    }
+
+    private void validateAnimal(AnimalDTO animalDTO) {
         validNameLength(animalDTO.getName());
         validNameFormat(animalDTO.getName());
         validSex(animalDTO.getSex());
@@ -49,12 +68,7 @@ public class AnimalController implements AnimalAPI {
         babyLengthFloor(animalDTO.getLength());
         elderLengthCeil(animalDTO.getLength());
 
-        return animalMapper.fromAnimal(animalService.createAnimal(animalMapper.fromDTO(animalDTO)));
-    }
-
-    @Override
-    public List<AnimalDTO> getAnimals() {
-        return animalService.getAnimals().stream().map(animalMapper::fromAnimal).collect(Collectors.toList());
+        if (animalDTO instanceof AnimalWithParentsDTO) parentsValidations((AnimalWithParentsDTO) animalDTO);
     }
 
     private void validNameFormat(String name) {
@@ -103,5 +117,25 @@ public class AnimalController implements AnimalAPI {
         if (length > Double.parseDouble(Constants.MAX_ELDER_LENGTH.getValue()))
             throw new AnimalException(HttpStatus.BAD_REQUEST,
                     new AnimalError(AnimalErrorCode.CRL_E0x16_2, AnimalErrorCode.CRL_E0x16_2.getMessage()));
+    }
+
+    private void parentsValidations(AnimalWithParentsDTO animalDTO) {
+        parentsExist(animalDTO.getFather(), animalDTO.getMother());
+        parentsSexMatch(animalDTO.getFather(), animalDTO.getMother());
+    }
+
+    private void parentsExist(UUID father, UUID mother) {
+        if (animalService.getAnimal(father) == null)
+            throw new AnimalException(HttpStatus.NOT_FOUND,
+                    new AnimalError(AnimalErrorCode.SER_E0x02_1, AnimalErrorCode.SER_E0x02_1.getMessage()));
+        if (animalService.getAnimal(mother) == null)
+            throw new AnimalException(HttpStatus.NOT_FOUND,
+                    new AnimalError(AnimalErrorCode.SER_E0x02_2, AnimalErrorCode.SER_E0x02_2.getMessage()));
+    }
+
+    private void parentsSexMatch(UUID father, UUID mother) {
+        if (animalService.getAnimal(father).getSex() != 'M' || animalService.getAnimal(mother).getSex() != 'F')
+            throw new AnimalException(HttpStatus.BAD_REQUEST,
+                    new AnimalError(AnimalErrorCode.SER_E0x03, AnimalErrorCode.SER_E0x03.getMessage()));
     }
 }

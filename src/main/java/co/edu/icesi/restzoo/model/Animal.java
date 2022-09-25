@@ -29,7 +29,7 @@ public class Animal {
     private char sex;
     private double weight;
     private double age;
-    private double height;
+    private double length;
     @DateTimeFormat(pattern = "yyyy-MM-ddTHH:mm:ss")
     private LocalDateTime arrivalDate;
 

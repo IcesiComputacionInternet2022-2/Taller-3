@@ -3,22 +3,22 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet id="a83e7911-05e4-4c19-ac67-a250959691dd" author="Samuel_Hernandez">
         <createTable tableName="ANIMAL">
-            <column name="animal_id" type="UUID">
+            <column name="id" type="UUID">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="animal_name" type="varchar(60)">
+            <column name="name" type="varchar(60)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="animal_sex" type="varchar(1)">
+            <column name="sex" type="varchar(1)">
                 <constraints nullable="false"/>
             </column>
-            <column name="animal_weight" type="numeric(12,4)">
+            <column name="weight" type="numeric(12,4)">
                 <constraints nullable="false"/>
             </column>
-            <column name="animal_age" type="numeric(5,3)">
+            <column name="age" type="numeric(5,3)">
                 <constraints nullable="false"/>
             </column>
-            <column name="animal_height" type="numeric(12,4)">
+            <column name="length" type="numeric(12,4)">
                 <constraints nullable="false"/>
             </column>
             <column name="arrival_date" type="date">

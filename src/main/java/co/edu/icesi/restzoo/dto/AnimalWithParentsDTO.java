@@ -3,6 +3,7 @@ package co.edu.icesi.restzoo.dto;
 import co.edu.icesi.restzoo.model.Animal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,24 +13,10 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalWithParentsDTO {
+@EqualsAndHashCode(callSuper = true)
+public class AnimalWithParentsDTO extends AnimalDTO {
 
-    private UUID id;
+    private UUID father;
 
-    private String name;
-
-    private char sex;
-
-    private double weight;
-
-    private double age;
-
-    private double height;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime arrivalDate;
-
-    private Animal father;
-
-    private Animal mother;
+    private UUID mother;
 }
