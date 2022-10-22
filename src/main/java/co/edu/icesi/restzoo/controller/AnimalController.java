@@ -24,8 +24,6 @@ public class AnimalController implements AnimalAPI {
 
     public final AnimalService animalService;
 
-    public final String VALID_NAME_FORMAT = "^[a-zA-Z\\s]*$";
-
     public final int NAME_LENGTH_CAP = 120;
 
     @Override
@@ -69,6 +67,7 @@ public class AnimalController implements AnimalAPI {
     }
 
     private void validNameFormat(String name) {
+        String VALID_NAME_FORMAT = "^[a-zA-Z\\s]*$";
         if (!name.matches(VALID_NAME_FORMAT))
             throw new AnimalException(HttpStatus.BAD_REQUEST,
                     new AnimalError(AnimalErrorCode.CRL_E0x11, AnimalErrorCode.CRL_E0x11.getMessage()));

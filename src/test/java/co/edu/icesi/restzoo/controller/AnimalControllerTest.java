@@ -1,17 +1,20 @@
 package co.edu.icesi.restzoo.controller;
 
+import co.edu.icesi.restzoo.constant.Constants;
 import co.edu.icesi.restzoo.dto.AnimalDTO;
 import co.edu.icesi.restzoo.mapper.AnimalMapper;
 import co.edu.icesi.restzoo.repository.ZooRepository;
 import co.edu.icesi.restzoo.service.AnimalService;
+import org.apache.maven.shared.utils.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class AnimalControllerTest {
@@ -19,7 +22,6 @@ public class AnimalControllerTest {
     private AnimalController animalController;
     private AnimalService animalService;
     private AnimalDTO animalDTO;
-    private AnimalDTO __;
     private ZooRepository zooRepository;
     private AnimalMapper animalMapper;
 
@@ -28,6 +30,7 @@ public class AnimalControllerTest {
     private final String BEAR_MOM = "Mama Oso";
     private final UUID MOM_ID = UUID.randomUUID();
     private final String BEAR_SON = "Osito";
+    private final UUID SON_ID = UUID.randomUUID();
 
     @BeforeEach
     public void init() {
@@ -52,6 +55,15 @@ public class AnimalControllerTest {
         double length = 130;
         LocalDateTime date = LocalDateTime.of(2002, 8, 22, 16,20,28);
         animalDTO = new AnimalDTO(MOM_ID, BEAR_MOM, sex, weight, age, length, date, null, null);
+    }
+
+    private void setupSceneSon() {
+        char sex = 'M';
+        double weight = 12000;
+        double age = 7;
+        double length = 80;
+        LocalDateTime date = LocalDateTime.of(2015, 7, 29, 7,30,51);
+        animalDTO = new AnimalDTO(SON_ID, BEAR_SON, sex, weight, age, length, date, BEAR_DAD, BEAR_MOM);
     }
 
     private boolean successfulCreation() {
@@ -89,6 +101,82 @@ public class AnimalControllerTest {
         verify(animalService,times(1)).getAnimal(MOM_ID);
     }
 
+    @Test
+    public void testValidNameFormat() {
+        setupSceneDad();
+        animalDTO.setName("0987654321{+}´-goofy ahh string");
+        assertFalse(successfulCreation());
+    }
 
+    @Test
+    public void testValidNameLength() {
+        setupSceneMom();
+        animalDTO.setName(StringUtils.repeat("E", animalController.NAME_LENGTH_CAP + 1));
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testValidSex() {
+        setupSceneDad();
+        animalDTO.setSex('I');
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testValidAgeCap() {
+        setupSceneMom();
+        animalDTO.setAge(Double.parseDouble(Constants.MAX_LONGEVITY.getValue()) + 1);
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testValidAgePositiveNumber() {
+        setupSceneMom();
+        animalDTO.setAge(-1);
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testHealthyWeightFloor() {
+        setupSceneDad();
+        animalDTO.setWeight(Double.parseDouble(Constants.MIN_HEALTHY_WEIGHT.getValue()) - 1);
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testHealthyWeightCeil() {
+        setupSceneMom();
+        animalDTO.setWeight(Double.parseDouble(Constants.MAX_HEALTHY_WEIGHT.getValue()) + 1);
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testBabyLengthFloor() {
+        setupSceneDad();
+        animalDTO.setWeight(Double.parseDouble(Constants.MIN_BABY_LENGTH.getValue()) - 1);
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testElderLengthCeil() {
+        setupSceneMom();
+        animalDTO.setWeight(Double.parseDouble(Constants.MAX_ELDER_LENGTH.getValue()) + 1);
+        assertFalse(successfulCreation());
+    }
+
+    @Test
+    public void testExactlyTwoParents() {
+
+    }
+
+    @Test
+    public void testParentsExist() {
+
+    }
+
+    @Test
+    public void testParentsSexMatch() {
+
+    }
 
 }
