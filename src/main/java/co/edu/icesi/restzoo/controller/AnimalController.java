@@ -44,7 +44,6 @@ public class AnimalController implements AnimalAPI {
         return animalMapper.fromAnimal(animalService.createAnimal(animalMapper.fromDTO(animalDTO)));
     }
 
-
     @Override
     public List<AnimalDTO> getAnimals() {
         return animalService.getAnimals().stream().map(animalMapper::fromAnimal).collect(Collectors.toList());

@@ -38,4 +38,12 @@ This is a Spring Boot project with a REST API and Liquibase integrations, for CR
     "age": positive rational number smaller than 31,
     "length": "String number between 30 and 220",
     "arrivalDate": "a date in the format yyyy-MM-ddThh-mm-ss in the past"
-  }```
+  }
+  ```
+  In case the new animal has parents within the zoo, **ADD** the following attributes to the request body json:
+  ```
+  {
+    "father": "the NAME of the father",
+    "mother": "the NAME of the mother"
+  }
+  ```
