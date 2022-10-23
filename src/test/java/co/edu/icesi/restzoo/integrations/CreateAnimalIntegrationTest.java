@@ -51,11 +51,10 @@ public class CreateAnimalIntegrationTest {
     private WebApplicationContext webApplicationContext;
     @Autowired
     private ObjectMapper objectMapper;
-    private final String JSON_PATH = "createAnimal.json";
 
     @SneakyThrows
-    private String parseResourceToString(String path) {
-        Resource resource = new ClassPathResource(path);
+    private String parseResourceToString() {
+        Resource resource = new ClassPathResource("createAnimal.json");
         try (Reader reader = new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)) {
             return FileCopyUtils.copyToString(reader);
         }
@@ -63,7 +62,7 @@ public class CreateAnimalIntegrationTest {
 
     @SneakyThrows
     private AnimalDTO setupAnimalDTO() {
-        String body = parseResourceToString(JSON_PATH);
+        String body = parseResourceToString();
         return objectMapper.readValue(body, AnimalDTO.class);
     }
 
@@ -100,7 +99,7 @@ public class CreateAnimalIntegrationTest {
     @Test
     @SneakyThrows
     public void testCreateAnimal() { // Positive Outcome
-        String body = parseResourceToString(JSON_PATH);
+        String body = parseResourceToString();
         MvcResult result = getStatusResult(body, "OK");
         AnimalDTO animalDTO = objectMapper.readValue(result.getResponse().getContentAsString(),AnimalDTO.class);
         assertThat(animalDTO,hasProperty("name",is("Aardvark")));
@@ -109,7 +108,7 @@ public class CreateAnimalIntegrationTest {
     @Test
     @SneakyThrows
     public void testCreateAnimalConflict() { // Negative Outcome: Repeated name
-        String body = parseResourceToString(JSON_PATH);
+        String body = parseResourceToString();
         MvcResult result = getStatusResult(body, "OK"); // Create once
         result = getStatusResult(body, "CONFLICT"); // Create twice
         AnimalError animalError = objectMapper.readValue(result.getResponse().getContentAsString(), AnimalError.class);
