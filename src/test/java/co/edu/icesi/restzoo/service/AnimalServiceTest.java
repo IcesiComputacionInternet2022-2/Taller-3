@@ -115,14 +115,6 @@ public class AnimalServiceTest {
     }
 
     @Test
-    public void testUniqueAnimalName() {
-        setAll();
-        successfulCreation(mommyBear);
-        daddyBear.setName(BEAR_MOM);
-        assertFalse(successfulCreation(daddyBear));
-    }
-
-    @Test
     public void testDateIsOnThePast() {
         setLittleBear();
         littleBear.setArrivalDate(LocalDateTime.now());
