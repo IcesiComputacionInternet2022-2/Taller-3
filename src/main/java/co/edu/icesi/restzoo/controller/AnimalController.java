@@ -7,6 +7,7 @@ import co.edu.icesi.restzoo.dto.AnimalDTO;
 import co.edu.icesi.restzoo.error.exception.AnimalError;
 import co.edu.icesi.restzoo.error.exception.AnimalException;
 import co.edu.icesi.restzoo.mapper.AnimalMapper;
+import co.edu.icesi.restzoo.model.Animal;
 import co.edu.icesi.restzoo.service.AnimalService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -56,14 +57,6 @@ public class AnimalController implements AnimalAPI {
         healthyWeightCeil(animalDTO.getWeight());
         babyLengthFloor(animalDTO.getLength());
         elderLengthCeil(animalDTO.getLength());
-
-        if (animalDTO.getFather() != null ||
-                animalDTO.getMother() != null)
-            parentsValidations(animalDTO);
-        else {
-            animalDTO.setFather(Constants.NO_FATHER.getValue());
-            animalDTO.setMother(Constants.NO_MOTHER.getValue());
-        }
     }
 
     private void validNameFormat(String name) {
@@ -113,32 +106,5 @@ public class AnimalController implements AnimalAPI {
         if (length > Double.parseDouble(Constants.MAX_ELDER_LENGTH.getValue()))
             throw new AnimalException(HttpStatus.BAD_REQUEST,
                     new AnimalError(AnimalErrorCode.CRL_E0x16_2, AnimalErrorCode.CRL_E0x16_2.getMessage()));
-    }
-
-    private void parentsValidations(AnimalDTO animalDTO) {
-        exactlyTwoParents(animalDTO);
-        parentsExist(animalDTO.getFather(), animalDTO.getMother());
-        parentsSexMatch(animalDTO.getFather(), animalDTO.getMother());
-    }
-
-    private void exactlyTwoParents(AnimalDTO animalDTO) {
-        if (animalDTO.getFather() == null || animalDTO.getMother() == null)
-            throw new AnimalException(HttpStatus.NOT_ACCEPTABLE,
-                    new AnimalError(AnimalErrorCode.SER_E0x02_3, AnimalErrorCode.SER_E0x02_3.getMessage()));
-    }
-
-    private void parentsExist(String father, String mother) {
-        if (animalService.getAnimal(animalService.getAnimal(father).getId()) == null)
-            throw new AnimalException(HttpStatus.NOT_FOUND,
-                    new AnimalError(AnimalErrorCode.SER_E0x02_1, AnimalErrorCode.SER_E0x02_1.getMessage()));
-        if (animalService.getAnimal(animalService.getAnimal(mother).getId()) == null)
-            throw new AnimalException(HttpStatus.NOT_FOUND,
-                    new AnimalError(AnimalErrorCode.SER_E0x02_2, AnimalErrorCode.SER_E0x02_2.getMessage()));
-    }
-
-    private void parentsSexMatch(String father, String mother) {
-        if (animalService.getAnimal(father).getSex() != 'M' || animalService.getAnimal(mother).getSex() != 'F')
-            throw new AnimalException(HttpStatus.BAD_REQUEST,
-                    new AnimalError(AnimalErrorCode.SER_E0x03, AnimalErrorCode.SER_E0x03.getMessage()));
     }
 }

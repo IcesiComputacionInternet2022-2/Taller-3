@@ -29,8 +29,6 @@ public class AnimalControllerTest {
     private final UUID DAD_ID = UUID.randomUUID();
     private final String BEAR_MOM = "Mama Oso";
     private final UUID MOM_ID = UUID.randomUUID();
-    private final String BEAR_SON = "Osito";
-    private final UUID SON_ID = UUID.randomUUID();
 
     @BeforeEach
     public void init() {
@@ -55,15 +53,6 @@ public class AnimalControllerTest {
         double length = 130;
         LocalDateTime date = LocalDateTime.of(2002, 8, 22, 16,20,28);
         animalDTO = new AnimalDTO(MOM_ID, BEAR_MOM, sex, weight, age, length, date, null, null);
-    }
-
-    private void setupSceneSon() {
-        char sex = 'M';
-        double weight = 12000;
-        double age = 7;
-        double length = 80;
-        LocalDateTime date = LocalDateTime.of(2015, 7, 29, 7,30,51);
-        animalDTO = new AnimalDTO(SON_ID, BEAR_SON, sex, weight, age, length, date, BEAR_DAD, BEAR_MOM);
     }
 
     private boolean successfulCreation() {
@@ -163,20 +152,4 @@ public class AnimalControllerTest {
         animalDTO.setWeight(Double.parseDouble(Constants.MAX_ELDER_LENGTH.getValue()) + 1);
         assertFalse(successfulCreation());
     }
-
-    @Test
-    public void testExactlyTwoParents() {
-
-    }
-
-    @Test
-    public void testParentsExist() {
-
-    }
-
-    @Test
-    public void testParentsSexMatch() {
-
-    }
-
 }
