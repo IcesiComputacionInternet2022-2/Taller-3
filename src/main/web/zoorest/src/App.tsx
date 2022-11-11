@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import {Card} from "./components/Card";
+import {Add} from "./pages/Add";
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-
+      <Add/>
     </div>
   );
 }
