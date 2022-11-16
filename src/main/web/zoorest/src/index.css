@@ -3,11 +3,8 @@
 @import "tailwindcss/utilities";
 
 @layer components {
-    .c-input {
-        border: 0.125rem solid #F0F0F0;
-    }
 
-    .c-button {
-
+    .c-type-orange::selection {
+        background-color: #FFEDD5FF;
     }
 }
