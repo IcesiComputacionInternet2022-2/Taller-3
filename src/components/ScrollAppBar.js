@@ -1,11 +1,6 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import {Slide, useScrollTrigger, Box, Toolbar, Typography, IconButton, AppBar} from '@mui/material';
 import PetsIcon from '@mui/icons-material/Pets';
-import {Slide, useScrollTrigger} from '@mui/material';
 
 export default function ScrollAppBar() {
     const trigger = useScrollTrigger()
