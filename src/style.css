@@ -1,0 +1,52 @@
+a{
+    cursor: pointer;
+}
+
+.navbar-style{
+    background-color: #4A5D23CC;
+}
+
+.card{
+    width: 35rem;
+}
+
+.sty-img{
+    width: 180px;
+    height: 180px;
+}
+
+#display-div, #info-father, #info-mother, #error-div, #message-mom, #message-father{
+    display: none;
+}
+
+#div-notify{
+    display: none;
+    padding: 10px;
+}
+
+div.masthead {
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    /*background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.riversandoceans.com%2Fcolorado-river-grand-canyon%2F&psig=AOvVaw2DU3NzW22JQ4TpIn1SbvPv&ust=1668891442286000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKjt5J7PuPsCFQAAAAAdAAAAABAE");*/
+    background-image: url("https://www.riversandoceans.com/wp-content/uploads/2021/08/Colorado-River-Grand-Canyon-National-Park.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    min-height: 100vh;
+    color: #ffffff
+}
+
+body {
+    background-size: cover;
+    min-height: 100vh;
+}
+
+button.btn-primary{
+    background-color: #4A5D23CC;
+    border-color: #4A5D23CC;
+}
+
+.card-text{
+    white-space: pre-line;
+}
