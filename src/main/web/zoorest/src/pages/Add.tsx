@@ -1,7 +1,12 @@
 import {Card} from "../components/Card";
-import React, {MouseEventHandler} from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {Input} from "../components/Input";
 import {ToggleButton} from "../components/ToggleButton";
+import {Button} from "../components/Button";
+
+const handlePostRequest = () => {
+
+}
 
 export const Add = (
     props : {
@@ -11,16 +16,7 @@ export const Add = (
 
     /*These are all styles, should be moved into separate enum or interface style file to follow solid*/
 
-    const HEIGHTS = {
-        "def": "h-[38rem]",
-        "sm" : "h-[20rem]"
-    };
-
-    const WIDTHS = {
-        "def": "w-[22rem]",
-        "lg" : "w-[32rem]"
-    };
-
+    const cardSize = "w-[22rem] h-[40rem]";
     const columnFlex : string = "flex flex-col items-center justify-around";
     const selectedButton : string = "bg-orange-200";
     const unselectedButton : string = "bg-orange-500";
@@ -37,9 +33,17 @@ export const Add = (
         'color' : 'bg-orange-500/50 text-white placeholder-orange-200 c-type-orange',
         'rounding' : 'rounded-[0.315rem]',
         'size' : 'h-[2rem] w-[16rem]',
-        'font' : 'text-[1rem] text-center',
-        'margin' : 'mb-[0.25rem]'
+        'font' : 'text-[1rem] text-center'
     };
+
+    let inputStylesAsString : string = "";
+    for (const [_, value] of Object.entries(INPUT_STYLES)) {
+        inputStylesAsString += " " + value;
+    }
+
+    const DATE_STYLES = {
+        'value' : 'DD/MM/YYYYTHH:mm'
+    }
 
     let selectedSex : string = "Male"; // This is a default to prevent user errors
 
@@ -56,20 +60,17 @@ export const Add = (
     }
 
     return (
-        <div className={"flex justify-center items-center space-x-4"}>
-            <Card flex={columnFlex} rounded={"rounded-lg"} width={WIDTHS.def} height={HEIGHTS.def} color={"bg-orange-400"} shadow={"drop-shadow-shine"}>
-                <Input placeHolder={"Name"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} margin={INPUT_STYLES.margin} color={INPUT_STYLES.color}/>
+        <div className={"flex flex-col justify-center items-center"}>
+            <Card action={"/all"} flex={columnFlex} rounded={"rounded-lg"} size={cardSize} color={"bg-orange-400"} shadow={"drop-shadow-shine"}>
+                <Input id={"new-name"} type={"text"} placeHolder={"Name"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
                 <ToggleButton title={"Sex"} size={2} labels={TOGGLE_STYLES.labels} colors={TOGGLE_STYLES.colors} buttonSizes={TOGGLE_STYLES.sizes} onClick={toggleFunction} background={TOGGLE_STYLES.background}/>
-                <Input placeHolder={"Weight"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} margin={INPUT_STYLES.margin} color={INPUT_STYLES.color}/>
-                <Input placeHolder={"Age"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} margin={INPUT_STYLES.margin} color={INPUT_STYLES.color}/>
-                <Input placeHolder={"Length"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} margin={INPUT_STYLES.margin} color={INPUT_STYLES.color}/>
-                <h1>arrivalDate</h1>
-                <h1>father</h1>
-                <h1>mother</h1>
-            </Card>
-
-            <Card blur={"backdrop-filter-blur"} flex={columnFlex} rounded={"rounded-xl"} width={WIDTHS.lg} height={HEIGHTS.sm} color={"bg-orange-200/60"} shadow={"drop-shadow-blur"} >
-
+                <Input id={"new-weight"} type={"number"} placeHolder={"Weight"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
+                <Input id={"new-age"} type={"number"} placeHolder={"Age"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
+                <Input id={"new-length"} type={"number"} placeHolder={"Length"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
+                <Input id={"new-arrivalDate"} type={"datetime-local"} placeHolder={"Length"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
+                <Input id={"new-Father"} type={"text"} placeHolder={"Father"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
+                <Input id={"new-Mother"} type={"text"} placeHolder={"Mother"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
+                <Input id={"new-submit"} placeHolder={"Create"} rounded={INPUT_STYLES.rounding} size={TOGGLE_STYLES.sizes} font={INPUT_STYLES.font} color={INPUT_STYLES.color} type={"submit"}/>
             </Card>
         </div>
     );

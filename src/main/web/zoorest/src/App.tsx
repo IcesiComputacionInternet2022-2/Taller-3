@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from "./components/Card";
 import {Add} from "./pages/Add";
+import {List} from "./pages/List";
+import {Home} from "./pages/Home";
+import {Info} from "./pages/Info";
+import {Navbar} from "./components/Navbar";
+import {Route, Routes} from "react-router-dom"
 
 function App() {
 
@@ -22,7 +27,15 @@ function App() {
 
   return (
     <div className="App">
-      <Add/>
+      <Navbar/>
+      <div>
+        <Routes>
+          <Route path={"/"} element={<Home/>}/>
+          <Route path={"/all"} element={<List/>}/>
+          <Route path={"/new"} element={<Add/>}/>
+          <Route path={"/info"} element={<Info/>}/>
+        </Routes>
+      </div>
     </div>
   );
 }
