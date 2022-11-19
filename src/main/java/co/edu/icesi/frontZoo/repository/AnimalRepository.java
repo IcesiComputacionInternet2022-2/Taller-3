@@ -1,0 +1,10 @@
+package co.edu.icesi.frontZoo.repository;
+
+import co.edu.icesi.frontZoo.model.Animal;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface AnimalRepository  extends CrudRepository<Animal, UUID> { }

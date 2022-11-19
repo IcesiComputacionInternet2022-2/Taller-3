@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Agregar Estado-Provincia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+
+<div class="container my-5">
+
+	<h3>SEARCH ANIMAL <i class="fas fa-cat"></i></h3>
+
+	<label for="name" class="col-form-label">Nombre</label> <input
+		type="text" th:field="*{name}" class="form-control" id="name"
+		placeholder="Nombre">
+	<span
+			th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+			class="text-danger">
+	</span>
+
+	<label for="id" class="col-form-label">ID</label> <input
+		type="text" th:field="*{id}" class="form-control" id="id"
+		placeholder="ID">
+	<span
+			th:if="${#fields.hasErrors('id')}" th:errors="*{id}"
+			class="text-danger">
+	</span>
+</div>
+
+<div class="container my-2" align="center">
+
+	<table style="width:80%" border="1"
+		   class = "table table-striped table-responsive-md">
+		<thead>
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Sexo</th>
+			<th>Peso</th>
+			<th>Anios</th>
+			<th>Altura</th>
+			<th>Fecha de arrivo</th>
+			<th>Padres</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="animal : ${allAnimals}">
+			<td th:text="${animal.id}"></td>
+			<td th:text="${animal.name}"></td>
+			<td th:text="${animal.sex}"></td>
+			<td th:text="${animal.weight}"></td>
+			<td th:text="${animal.age}"></td>
+			<td th:text="${animal.height}"></td>
+			<td th:text="${animal.arrival_date}"></td>
+			<td th:text="${animal.parents}"></td>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/add}" class="btn btn-primary btn-sm mb-3" >Agregar Animal</a>
+	<p>
+		<a href="/"><i class="fas fa-home ml-2"></i> Regresar</a>
+	</p>
+</div>
+</body>
+</html>
