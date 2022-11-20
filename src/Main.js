@@ -8,6 +8,7 @@ import {
 import Create from "./Create";
 import List from "./List";
 import Search from "./Search";
+import Home from "./Home";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -20,7 +21,7 @@ class Main extends Component {
           <Container>
             <Navbar.Brand href="/">Zoo</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="/">Crear Tucan</Nav.Link>
+              <Nav.Link href="/crear">Crear Tucan</Nav.Link>
               <Nav.Link href="/list">Listar Tucanes</Nav.Link>
               <Nav.Link href="/search">Buscar Tucan</Nav.Link>
             </Nav>
@@ -28,9 +29,10 @@ class Main extends Component {
         </Navbar>
         <div className="content">
           <Routes>
-            <Route exact path="/" element={<Create />} />
+            <Route exact path="/crear" element={<Create />} />
             <Route path="/list" element={<List />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </BrowserRouter>

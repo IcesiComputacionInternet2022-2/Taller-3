@@ -49,48 +49,50 @@ class Search extends Component {
               </InputGroup>
             </Col>
           </Row>
-          <Row>
-            {this.state.toucans.map((toucan) => (
-              <Col>
-                <Card style={{ width: '18rem' }}>
-                  <Card.Body>
-                      <Row>
-                        <Col xs={4}><h6>Padre: </h6></Col>
-                        <Col><label>{toucan.fatherName}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Madre: </h6></Col>
-                        <Col><label>{toucan.motherName}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Nombre: </h6></Col>
-                        <Col><label>{toucan.name}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Sexo: </h6></Col>
-                        <Col><label>{toucan.sex}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Altura: </h6></Col>
-                        <Col><label>{toucan.height}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Peso: </h6></Col>
-                        <Col><label>{toucan.weight}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Edad: </h6></Col>
-                        <Col><label>{toucan.age}</label></Col>
-                      </Row>
-                      <Row>
-                        <Col xs={4}><h6>Llegada: </h6></Col>
-                        <Col><label>{toucan.dateOfArrival}</label></Col>
-                      </Row>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+          <div className="limit">
+            <Row>
+              {this.state.toucans.map((toucan) => (
+                <Col>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Row>
+                          <Col xs={4}><h6>Padre: </h6></Col>
+                          <Col><label>{toucan.fatherName}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Madre: </h6></Col>
+                          <Col><label>{toucan.motherName}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Nombre: </h6></Col>
+                          <Col><label>{toucan.name}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Sexo: </h6></Col>
+                          <Col><label>{toucan.sex}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Altura: </h6></Col>
+                          <Col><label>{toucan.height}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Peso: </h6></Col>
+                          <Col><label>{toucan.weight}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Edad: </h6></Col>
+                          <Col><label>{toucan.age}</label></Col>
+                        </Row>
+                        <Row>
+                          <Col xs={4}><h6>Llegada: </h6></Col>
+                          <Col><label>{toucan.dateOfArrival}</label></Col>
+                        </Row>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </div>
         </Container>
       </div>
     );

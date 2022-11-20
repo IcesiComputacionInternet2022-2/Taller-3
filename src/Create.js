@@ -5,15 +5,16 @@ class Create extends Component {
     e.preventDefault();
     const data = new FormData(e.target);
     const toucanData = {
-      fatherName: data.get("fatherName"),
-      motherName: data.get("motherName"),
+      fatherName: (data.get("fatherName") == '')?null: data.get("fatherName"),
+      motherName: (data.get("motherName") == '')?null: data.get("motherName"),
       name: data.get("name"),
       sex: data.get("sex"),
+      dateOfArrival: data.get("dateOfArrival"),
       weight: data.get("weight"),
       height: data.get("height"),
-      age: data.get("age"),
-      dateOfArrival: data.get("dateOfArrival")
+      age: data.get("age")
     };
+    console.log(toucanData)
     const response = await fetch("http://localhost:8080/toucans", {
       method: "POST",
       headers: {
@@ -70,8 +71,7 @@ class Create extends Component {
             </tr>
             <tr>
               <td><label>Fecha de ingreso: </label></td>
-              <td><input type="text" id="dateOfArrival" name="dateOfArrival" class="form-control form-control-lg border border-dark" required/></td>
-              <td><p>Formato: año/mes/día</p></td>
+              <td><input type="date" id="dateOfArrival" name="dateOfArrival" class="form-control form-control-lg border border-dark" required/></td>
             </tr>
             <tr>
               <td>
