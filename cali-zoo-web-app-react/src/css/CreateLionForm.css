@@ -1,0 +1,11 @@
+.CreateLionForm{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.CreateLionForm button{
+    margin-top: 12px;
+}

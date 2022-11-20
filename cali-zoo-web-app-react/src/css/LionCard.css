@@ -1,0 +1,51 @@
+.LionCard{
+    width: fit-content;
+    max-width: fit-content;
+}
+
+.LionCard .card{
+    border-radius: 15px;
+    width: 418px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    stroke: transparent;
+}
+
+.LionCard img{
+    width: 180px; 
+    border-radius: 10px;
+}
+
+.LionName{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.LionName img{
+    width: 24px;
+    height: 24px;
+}
+
+.LionCardUUID{
+    color: #2b2a2a;
+    text-align: start;
+    padding: 4px;
+}
+
+.LionCardData{
+    background-color: #efefef;
+    margin: 0px;
+}
+
+.LionGenderDate{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-left: 4px;
+}
+
+.LionGenderDate label{
+    height: fit-content;
+    margin: 0;
+}

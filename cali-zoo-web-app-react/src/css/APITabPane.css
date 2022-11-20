@@ -1,0 +1,9 @@
+.Tabs{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+li.nav-item button{
+    color: #2e7d32;
+}
