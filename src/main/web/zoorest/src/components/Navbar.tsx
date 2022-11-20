@@ -12,7 +12,7 @@ export const Navbar = (
     const homeStyle : string = `text-2xl font-extrabold text-orange-700 ${linkHoverStyle} ${linkFocusStyle}`;
 
     return (
-        <nav className={"h-12 mb-8 px-[7rem] bg-orange-400 flex justify-between items-center drop-shadow-shine"}>
+        <header className={"h-12 mb-8 px-[7rem] bg-orange-400 flex justify-between items-center drop-shadow-shine sticky top-0 z-50"}>
             <div>
                 <Link to={"/"} className={homeStyle}>React Zoo</Link>
             </div>
@@ -21,6 +21,6 @@ export const Navbar = (
                 <Link id={"nav-new"} to={"/new"} className={linkStyle}>ADD</Link>
                 <Link to={"/info"} className={linkStyle}>INFO</Link>
             </div>
-        </nav>
+        </header>
     );
 }

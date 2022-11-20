@@ -2,18 +2,12 @@ import {Card} from "../components/Card";
 import React, {useState} from "react";
 import {Input} from "../components/Input";
 import {ToggleButton} from "../components/ToggleButton";
-import {Styles} from "../Styles";
+import {Styles} from "../tailwind/Styles";
 import {useNavigate} from "react-router-dom";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 const S = new Styles();
 
-export const Add = (
-    props : {
-
-    }
-) => {
+export const Add = () => {
     const navigate = useNavigate();
     let inputStylesAsString : string = "";
     for (const [_, value] of Object.entries(S.INPUT_STYLES)) {
@@ -31,8 +25,9 @@ export const Add = (
         'mother' : null
     });
 
+    const ERROR_STYLE = "text-red-500 font-medium text-xs";
     let [errorMessage, setErrorMessage] = useState( "");
-    let [errorStyle, setErrorStyle] = useState("text-red-500 font-medium text-xs");
+    let [errorStyle, setErrorStyle] = useState(ERROR_STYLE);
 
     const toggleFunction = (e : React.MouseEvent) => {
         e.preventDefault();
@@ -69,7 +64,7 @@ export const Add = (
                 let resUnknown = res as {timestamp : string, status : number, error : string, path : string}
                 let message = (res_.message);
                 let code = (res_.code)
-                setErrorStyle("text-red-500 font-medium text-xs");
+                setErrorStyle(ERROR_STYLE);
                 setErrorMessage(`${message === undefined ? resUnknown.error : message} (\nError Code: ${code === undefined ? resUnknown.status : code})`);
             }
         });
@@ -111,7 +106,6 @@ export const Add = (
         })
             .then(res => res.json())
             .then((res) => {
-                console.log(res);
                 if (res.hasOwnProperty("code") || res.hasOwnProperty("error")) {
                     OK = false;
                     return res;
@@ -120,8 +114,8 @@ export const Add = (
     }
 
     return (
-        <div className={"flex flex-col justify-center items-center"}>
-            <Card onSubmit={handleSubmit} flex={S.columnFlex} rounded={S.CARD_STYLES.rounded} size={S.CARD_STYLES.size} color={S.CARD_STYLES.color} shadow={S.CARD_STYLES.shadow}>
+        <div className={"flex flex-col justify-center items-center space-x-4 mb-[3rem]"}>
+            <Card isForm={true} onSubmit={handleSubmit} flex={S.flexAdd} rounded={S.CARD_STYLES.rounded} size={S.CARD_STYLES.size} color={S.CARD_STYLES.color} shadow={S.CARD_STYLES.shadow}>
                 <Input id={"new-name"} type={"text"} placeHolder={"Name"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
                 <ToggleButton title={"Sex"} size={2} labels={S.TOGGLE_STYLES.labels} colors={S.TOGGLE_STYLES.colors} buttonSizes={S.TOGGLE_STYLES.sizes} onClick={toggleFunction} background={S.TOGGLE_STYLES.background} hover={S.TOGGLE_STYLES.hover}/>
                 <Input id={"new-weight"} type={"number"} placeHolder={"Weight"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>

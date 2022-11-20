@@ -1,5 +1,6 @@
 export class Styles {
-    columnFlex : string = "flex flex-col items-center justify-around";
+    flexAdd : string = "flex flex-col items-center justify-around";
+    flexAll : string = "flex flex-col items-center space-y-2";
     selectedButton : string = "bg-orange-300";
     unselectedButton : string = "bg-orange-500";
     
@@ -25,6 +26,17 @@ export class Styles {
         'size' : 'h-[2rem] w-[16rem]',
         'font' : 'text-[1rem] text-center',
     };
+
+    SEARCH_STYLES = {
+        'size' : 'h-[2rem] w-3/4',
+        'listCardSize' : 'h-auto w-3/4',
+        'listCardSpacing' : 'py-6 px-4',
+        'focus' : 'border-b-2 border-transparent transition ease-in-out delay-450 focus:border-solid focus:border-amber-700 focus:bg-orange-300 focus:drop-shadow-shine-field focus:placeholder-orange-600 focus:text-orange-800',
+        'color' : 'bg-orange-500 text-white placeholder-orange-100 c-type-orange autofill:bg-orange-500 autofill:text-white',
+        'cardSize' : 'h-auto w-4/5',
+        'cardSpacing' : 'py-6 mb-[6rem]',
+        'cardColor' : 'bg-transparent'
+    }
 
     DATE_STYLES = {
         'value' : '2000-01-01T00:00:00'

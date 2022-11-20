@@ -1,5 +1,6 @@
 import {Input} from "./Input";
-import {Styles} from "../Styles";
+import {Styles} from "../tailwind/Styles";
+import React from "react";
 
 const S = new Styles();
 
@@ -9,8 +10,7 @@ export const Search = (
     }
 ) => {
     return (
-        <div>
-            <Input id={"all-search"} placeHolder={"Search animal... (not working)"} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} type={"text"}/>
-        </div>
+        <Input id={"all-search"} type={"text"} placeHolder={"Search animal... (not working)"} focus={S.SEARCH_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.SEARCH_STYLES.size} font={S.INPUT_STYLES.font} color={S.SEARCH_STYLES.color}/>
+
     );
 }
