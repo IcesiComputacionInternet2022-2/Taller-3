@@ -4,7 +4,7 @@ export default function FlexCards() {
     return (
         <Box component={"div"} bgcolor="rose.main" sx={{display: 'flex', justifyContent: 'space-evenly', paddingY: 10}}>
             <Card elevation={0} sx={{maxWidth: 345}}>
-                <CardActionArea>
+                <CardActionArea href={"/create"}>
                     <CardMedia
                         component="img"
                         height="140"
@@ -23,7 +23,7 @@ export default function FlexCards() {
                 </CardActionArea>
             </Card>
             <Card elevation={0} sx={{maxWidth: 345}}>
-                <CardActionArea>
+                <CardActionArea href={"/list"}>
                     <CardMedia
                         component="img"
                         height="140"
@@ -42,7 +42,7 @@ export default function FlexCards() {
                 </CardActionArea>
             </Card>
             <Card elevation={0} sx={{maxWidth: 345}}>
-                <CardActionArea>
+                <CardActionArea href={"/search"}>
                     <CardMedia
                         component="img"
                         height="140"

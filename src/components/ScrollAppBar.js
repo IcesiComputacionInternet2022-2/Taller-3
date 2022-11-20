@@ -14,6 +14,7 @@ export default function ScrollAppBar() {
                             edge="start"
                             color="inherit"
                             aria-label="logo"
+                            href={"/"}
                         >
                             <PetsIcon/>
                         </IconButton>

@@ -1,17 +1,21 @@
-import ScrollAppBar from "./components/ScrollAppBar";
-import FlexBoxDiv from './components/FlexBoxDiv'
-import FlexCards from './components/FlexCards'
-import Footer from './components/Footer'
-import theme from './theme/createTheme'
-import {ThemeProvider} from '@mui/material/styles'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Box from "@mui/material/Box";
+import Home from "./pages/Home";
+import Create from "./pages/Create";
+import List from "./pages/List";
+import Search from "./pages/Search";
 
 export default function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <ScrollAppBar/>
-            <FlexBoxDiv/>
-            <FlexCards/>
-            <Footer/>
-        </ThemeProvider>
+        <Box component={"div"}>
+            <Router>
+                <Routes>
+                    <Route path={"/"} element={<Home/>}></Route>
+                    <Route path={"/create"} element={<Create/>}></Route>
+                    <Route path={"/list"} element={<List/>}></Route>
+                    <Route path={"/search"} element={<Search/>}></Route>
+                </Routes>
+            </Router>
+        </Box>
     );
 }
