@@ -1,0 +1,50 @@
+h1{
+    padding: 20;
+    color: white;
+    align-items: center;
+}
+div.masterPageContent{
+ 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+div.masterPage{
+    background-image: url("resources/photo-1489392191049-fc10c97e64b6.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover ;
+    background-attachment: fixed;
+    background-position: right center;
+    background-attachment: scroll;
+    background-size: cover;
+    min-height: 100vh;
+    color: #ffffff;
+    padding-top: 10rem;
+    padding-bottom: calc(10rem - 4.5rem);
+    
+}
+h2.h2messageError{
+    color: darkred;
+    
+}
+h2.h2messageSuccess{
+    color: forestgreen;
+}
+
+div.cardTable{
+
+    background-color: #ffffff7e;
+    border-radius: 15px;
+}
+nav.navbar{
+    background-color: #ffffff7e;
+}
+div.card{
+    background-color: #ffffffaf;
+}
+div.cardHome{
+    background-color: #07030371;
+    border-radius: 15px;
+}
+
+

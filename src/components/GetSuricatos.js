@@ -1,29 +1,27 @@
 import { React, Component, useEffect, useState } from "react";
 
-function GetTigers() {
+function GetSuricatos() {
 
-    const [tigers, setTiger] = useState([]);
+    const [suricatos, setSuricatos] = useState([]);
 
     useEffect(() => {
-        const handlerTigers = async () => {
-            let url = 'http://localhost:8080/tigers'
+        const handlerSuricatos = async () => {
+            let url = 'http://localhost:8080/suricato'
         
             const res = await fetch(url)
             const answer = await res.json()
         
             //console.log(answer)
         
-            setTiger(answer)
+            setSuricatos(answer)
         }
         
-        handlerTigers().catch(console.error)
+        handlerSuricatos().catch(console.error)
     }, [])
 
-    let tb_data = tigers.map((item) => {
+    let tb_data = suricatos.map((item) => {
         return (
             <tr key={item.id}>
-                <td>{item.mother? item.mother:"Doesn't have"}</td>
-                <td>{item.father? item.father:"Doesn't have"}</td>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.gender}</td>
@@ -37,12 +35,11 @@ function GetTigers() {
     return (
         <div>
             <div className="m-0 vh-100  align-items-center m-0 p-0">
+            <div className="cardTable m-3"> 
                 <div className="col-auto p-3 text-center">
                     <table class="table" id="table">
                         <thead>
                             <tr>
-                                <th scope="col">Mother</th>
-                                <th scope="col">Father</th>
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Gender</th>
@@ -58,8 +55,9 @@ function GetTigers() {
                     </table>
                 </div>
             </div>
+            </div>
         </div>
     )
 }
 
-export default GetTigers;
+export default GetSuricatos;

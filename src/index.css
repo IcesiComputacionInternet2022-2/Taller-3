@@ -1,0 +1,19 @@
+body {
+  margin: 20;
+  padding: 20;
+  background-image: url(resources/sabanabg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover ;
+  background-attachment: fixed;
+  background-position: right center;
+  background-attachment: fixed;
+  background-size: cover;
+
+
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
