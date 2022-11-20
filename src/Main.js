@@ -16,23 +16,23 @@ class Main extends Component {
   render() {
     return (
       <BrowserRouter>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="/">Zoo</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="/">Crear Tucan</Nav.Link>
-            <Nav.Link href="/list">Listar Tucanes</Nav.Link>
-            <Nav.Link href="/search">Buscar Tucan</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <div className="content">
-                <Routes>
-                  <Route exact path="/" element={<Create />} />
-                  <Route path="/list" element={<List />} />
-                  <Route path="/search" element={<Search />} />
-                </Routes>
-              </div>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand href="/">Zoo</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="/">Crear Tucan</Nav.Link>
+              <Nav.Link href="/list">Listar Tucanes</Nav.Link>
+              <Nav.Link href="/search">Buscar Tucan</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+        <div className="content">
+          <Routes>
+            <Route exact path="/" element={<Create />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/search" element={<Search />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     );
   }

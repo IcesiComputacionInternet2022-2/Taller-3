@@ -5,8 +5,8 @@ class Create extends Component {
     e.preventDefault();
     const data = new FormData(e.target);
     const toucanData = {
-      fatherId: data.get("fatherName"),
-      motherId: data.get("motherName"),
+      fatherName: data.get("fatherName"),
+      motherName: data.get("motherName"),
       name: data.get("name"),
       sex: data.get("sex"),
       weight: data.get("weight"),
