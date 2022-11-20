@@ -39,6 +39,12 @@ export const Add = () => {
         }
         let clickedButton : HTMLButtonElement = (e.target as HTMLButtonElement);
         clickedButton.className = clickedButton.className.replaceAll(S.unselectedButton, S.selectedButton);
+        setAnimal((prevState) => {
+            return {
+                ...prevState,
+                sex : `${(prevState.sex === 'M') ? 'F' : 'M'}`
+            }
+        });
     }
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {

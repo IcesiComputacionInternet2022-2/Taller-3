@@ -19,7 +19,7 @@ export const Animal = (
     let [error, setError] = useState(false);
 
     const handleGet = async () => {
-        let input: string = name.includes(SPACE) ? `/name=${name}` : `/id=${name}`;
+        let input: string = /[0-9]/g.test(name) ? `/id=${name}` : `/name=${name}`;
             return fetch(`http://localhost:8080/animals${input}`)
                 .then((res) => res.json())
                 .then(res => (res as AnimalType))
