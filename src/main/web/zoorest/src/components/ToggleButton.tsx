@@ -9,7 +9,8 @@ export const ToggleButton = (
         colors : string[],
         buttonSizes : string,
         background : string,
-        onClick : {(e : React.MouseEvent) : any}
+        onClick : {(e : React.MouseEvent) : any},
+        hover? : string
     }
 ) => {
     return (
@@ -18,7 +19,7 @@ export const ToggleButton = (
             <div id={"toggleButtons" + props.title} className={"flex justify-center items-center"}>
                 {Array.from({length: props.size}, (_, index) => {
                     const rounding = index === 0 ? "rounded-bl-lg" : index === props.size - 1 ? "rounded-br-lg" : "rounded-none";
-                    return <Button id={"cButton" + index} key={index} label={props.labels[index]} onClick={props.onClick} color={props.colors[index]} size={props.buttonSizes} rounded={rounding}/>
+                    return <Button id={"cButton" + index} key={index} label={props.labels[index]} onClick={props.onClick} color={props.colors[index]} size={props.buttonSizes} rounded={rounding} hover={props.hover}/>
                 })}
             </div>
         </div>

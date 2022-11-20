@@ -1,77 +1,138 @@
 import {Card} from "../components/Card";
-import React, {MouseEventHandler, useState} from "react";
+import React, {useState} from "react";
 import {Input} from "../components/Input";
 import {ToggleButton} from "../components/ToggleButton";
-import {Button} from "../components/Button";
+import {Styles} from "../Styles";
+import {useNavigate} from "react-router-dom";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
-const handlePostRequest = () => {
-
-}
+const S = new Styles();
 
 export const Add = (
     props : {
 
     }
 ) => {
-
-    /*These are all styles, should be moved into separate enum or interface style file to follow solid*/
-
-    const cardSize = "w-[22rem] h-[40rem]";
-    const columnFlex : string = "flex flex-col items-center justify-around";
-    const selectedButton : string = "bg-orange-200";
-    const unselectedButton : string = "bg-orange-500";
-
-    const TOGGLE_STYLES = {
-        'labels' : ["Male", "Female"],
-        'colors' : [selectedButton, unselectedButton],
-        'sizes' : 'w-32 h-10',
-        'background': 'bg-orange-500/50 rounded-lg'
-    };
-
-    const INPUT_STYLES = {
-        'focus' : 'border-b-2 border-transparent transition ease-in-out delay-450 focus:border-solid focus:border-amber-700 focus:bg-orange-200 focus:drop-shadow-shine-field focus:placeholder-orange-400 focus:text-orange-600',
-        'color' : 'bg-orange-500/50 text-white placeholder-orange-200 c-type-orange',
-        'rounding' : 'rounded-[0.315rem]',
-        'size' : 'h-[2rem] w-[16rem]',
-        'font' : 'text-[1rem] text-center'
-    };
-
+    const navigate = useNavigate();
     let inputStylesAsString : string = "";
-    for (const [_, value] of Object.entries(INPUT_STYLES)) {
+    for (const [_, value] of Object.entries(S.INPUT_STYLES)) {
         inputStylesAsString += " " + value;
     }
 
-    const DATE_STYLES = {
-        'value' : 'DD/MM/YYYYTHH:mm'
-    }
+    let [animal, setAnimal] = useState({
+        'name' : '',
+        'sex' : 'M',
+        'weight' : '0.0',
+        'length' : '0.0',
+        'age' : 0.0,
+        'arrivalDate' : "2000-01-01T00:00:00",
+        'father' : null,
+        'mother' : null
+    });
 
-    let selectedSex : string = "Male"; // This is a default to prevent user errors
+    let [errorMessage, setErrorMessage] = useState( "");
+    let [errorStyle, setErrorStyle] = useState("text-red-500 font-medium text-xs");
 
     const toggleFunction = (e : React.MouseEvent) => {
+        e.preventDefault();
         const parentToggle = document.getElementById("toggleButtonsSex");
         const children = parentToggle!!.children;
         for (let i = 0; i < children.length; i++) {
             const child : HTMLButtonElement = children[i] as HTMLButtonElement;
-            child.className = child.className.replaceAll(selectedButton, unselectedButton);
+            child.className = child.className.replaceAll(S.selectedButton, S.unselectedButton);
         }
         let clickedButton : HTMLButtonElement = (e.target as HTMLButtonElement);
-        clickedButton.className = clickedButton.className.replaceAll(unselectedButton, selectedButton);
-        selectedSex = clickedButton.name;
+        clickedButton.className = clickedButton.className.replaceAll(S.unselectedButton, S.selectedButton);
+    }
+
+    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+        let name = (e.target as HTMLInputElement).name;
+        let value = (e.target as HTMLInputElement).value;
+        setAnimal((prevState) => {
+            return {
+                ...prevState,
+                [name] : value
+            }
+        });
+    }
+
+    let OK : boolean = true;
+    const handleSubmit = async (e: React.FormEvent) => {
+        setErrorStyle("text-gray-700 font-medium text-xs")
+        setErrorMessage("Awaiting server response...")
+        e.preventDefault();
+        await sendPost().then((res) => {
+            if (OK) navigate('/all');
+            else {
+                let res_ = (res as {code : string, message : string});
+                let resUnknown = res as {timestamp : string, status : number, error : string, path : string}
+                let message = (res_.message);
+                let code = (res_.code)
+                setErrorStyle("text-red-500 font-medium text-xs");
+                setErrorMessage(`${message === undefined ? resUnknown.error : message} (\nError Code: ${code === undefined ? resUnknown.status : code})`);
+            }
+        });
+    }
+
+    const correctParents = async () => {
+        if (animal.father === '') {
+        setAnimal((prevState) => {
+            return {
+                ...prevState,
+                father: null
+            }
+        });
+    }
+    if (animal.mother === '') {
+        setAnimal((prevState) => {
+            return {
+                ...prevState,
+                father: null
+            }
+        });
+    }
+    }
+
+    const buildJson = async () => {
+        await correctParents();
+        return JSON.stringify(animal);
+    }
+
+    const sendPost = async () => {
+        let body = await buildJson();
+        return fetch('http://localhost:8080/animals', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: body
+        })
+            .then(res => res.json())
+            .then((res) => {
+                console.log(res);
+                if (res.hasOwnProperty("code") || res.hasOwnProperty("error")) {
+                    OK = false;
+                    return res;
+                }
+            });
     }
 
     return (
         <div className={"flex flex-col justify-center items-center"}>
-            <Card action={"/all"} flex={columnFlex} rounded={"rounded-lg"} size={cardSize} color={"bg-orange-400"} shadow={"drop-shadow-shine"}>
-                <Input id={"new-name"} type={"text"} placeHolder={"Name"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <ToggleButton title={"Sex"} size={2} labels={TOGGLE_STYLES.labels} colors={TOGGLE_STYLES.colors} buttonSizes={TOGGLE_STYLES.sizes} onClick={toggleFunction} background={TOGGLE_STYLES.background}/>
-                <Input id={"new-weight"} type={"number"} placeHolder={"Weight"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <Input id={"new-age"} type={"number"} placeHolder={"Age"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <Input id={"new-length"} type={"number"} placeHolder={"Length"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <Input id={"new-arrivalDate"} type={"datetime-local"} placeHolder={"Length"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <Input id={"new-Father"} type={"text"} placeHolder={"Father"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <Input id={"new-Mother"} type={"text"} placeHolder={"Mother"} focus={INPUT_STYLES.focus} rounded={INPUT_STYLES.rounding} size={INPUT_STYLES.size} font={INPUT_STYLES.font} color={INPUT_STYLES.color}/>
-                <Input id={"new-submit"} placeHolder={"Create"} rounded={INPUT_STYLES.rounding} size={TOGGLE_STYLES.sizes} font={INPUT_STYLES.font} color={INPUT_STYLES.color} type={"submit"}/>
+            <Card onSubmit={handleSubmit} flex={S.columnFlex} rounded={S.CARD_STYLES.rounded} size={S.CARD_STYLES.size} color={S.CARD_STYLES.color} shadow={S.CARD_STYLES.shadow}>
+                <Input id={"new-name"} type={"text"} placeHolder={"Name"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <ToggleButton title={"Sex"} size={2} labels={S.TOGGLE_STYLES.labels} colors={S.TOGGLE_STYLES.colors} buttonSizes={S.TOGGLE_STYLES.sizes} onClick={toggleFunction} background={S.TOGGLE_STYLES.background} hover={S.TOGGLE_STYLES.hover}/>
+                <Input id={"new-weight"} type={"number"} placeHolder={"Weight"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <Input id={"new-age"} type={"number"} placeHolder={"Age"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <Input id={"new-length"} type={"number"} placeHolder={"Length"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <Input id={"new-arrivalDate"} type={"datetime-local"} dateStyles={S.DATE_STYLES} placeHolder={"Arrival Date"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <Input id={"new-Father"} type={"text"} placeHolder={"Father"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <Input id={"new-Mother"} type={"text"} placeHolder={"Mother"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
+                <Input id={"new-submit"} placeHolder={"Create"} rounded={S.INPUT_STYLES.rounding} size={S.TOGGLE_STYLES.sizes} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} type={"submit"} hover={S.TOGGLE_STYLES.hover}/>
             </Card>
+            <p className={errorStyle}>{errorMessage}</p>
         </div>
     );
 }

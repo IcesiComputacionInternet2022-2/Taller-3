@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from "./components/Card";
 import {Add} from "./pages/Add";
-import {List} from "./pages/List";
+import {All} from "./pages/All";
 import {Home} from "./pages/Home";
 import {Info} from "./pages/Info";
 import {Navbar} from "./components/Navbar";
@@ -31,7 +31,7 @@ function App() {
       <div>
         <Routes>
           <Route path={"/"} element={<Home/>}/>
-          <Route path={"/all"} element={<List/>}/>
+          <Route path={"/all"} element={<All/>}/>
           <Route path={"/new"} element={<Add/>}/>
           <Route path={"/info"} element={<Info/>}/>
         </Routes>

@@ -3,7 +3,7 @@ import React from "react";
 export const Card = (
     props : {
         children? : React.ReactNode,
-        action : string,
+        onSubmit : {(e : React.FormEvent) : any},
         size : string,
         color : string,
         rounded : string,
@@ -13,7 +13,7 @@ export const Card = (
     }
 ) => {
     return (
-        <form action={props.action} className={`${props.flex} ${props.size} ${props.color} ${props.rounded} ${props.blur} ${props.shadow}`}>
+        <form autoComplete={"off"} onSubmit={props.onSubmit} className={`${props.flex} ${props.size} ${props.color} ${props.rounded} ${props.blur} ${props.shadow}`}>
             {props.children}
         </form>
     );

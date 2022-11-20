@@ -13,8 +13,8 @@ export const Button = (
     }
 ) => {
     const dimensions : string = `${props.size}`;
-
+    // props.focus = props.focus === undefined ? "" : props.focus;
     return (
-        <button id={props.id} name={props.label} onClick={props.onClick} className={`${dimensions} ${props.rounded} ${props.color} ${props.focus} ${props.hover} focus:outline-none`}>{props.label}</button>
+        <button id={props.id} name={props.label} onClick={props.onClick} className={`${dimensions} ${props.rounded} ${props.color} focus:outline-none ${props.hover === undefined ? "" : props.hover} ${props.focus === undefined ? "" : props.focus}`}>{props.label}</button>
     );
 }
