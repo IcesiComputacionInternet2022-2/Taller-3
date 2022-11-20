@@ -1,0 +1,26 @@
+body{
+    background-color:#9ce98f;
+}
+
+table{
+    
+    text-align: center;
+    border: 1px solid #000000;
+    margin: auto;
+    margin-top: 10%;
+    color:white;
+    background-color: white;
+    padding: 10%
+  
+}
+
+td{
+    
+    padding: 2%;
+    text-align: center;
+}
+th{
+    
+    padding: 2%;
+    text-align: center;
+}

@@ -1,36 +1,40 @@
-import { useState } from 'react';
-import MainPane from './components/MainPane';
 
-function App() {
+import  './App.css';
+import React from 'react';
+import Menu from './components/Menu';
+import Create from './components/Create';
+import List from './components/List';
+import Search from './components/Search';
 
-  const [page, setPage] = useState(0)
-
-  var handlePageChange = (pageNum) => {
-    setPage(pageNum)
+class App extends React.Component{
+  
+  constructor(props){
+    super(props)
+    this.state = {
+      currentPage: 1
+    }
+  }
+  changePage = e=>{
+    this.setState({
+      currentPage:e.target.name
+    })
   }
 
-  return (
-    <>
-    {page === 0 &&
-      (<div class="masthead">
-      <div class="container px-4 px-lg-5 h-100">
-        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-          <div class="col-lg-8 align-self-end">
-            <h1 class="text-white font-weight-bold">Zoo Canyon River</h1>
-            <hr class="divider" />
-          </div>
-          <div class="col-lg-8 align-self-baseline">
-            <p class="text-white-75 mb-5">Press start to add a new animal!</p>
-            <button class="btn btn-primary btn-xl" onClick={() => handlePageChange(1)}>Iniciar</button>
-          </div>
-        </div>
-      </div>
-    </div>)}
-    {page !== 0 &&
-      <MainPane handlePageChange={handlePageChange} page={page}></MainPane>
+  
+  
+  render() {
+    switch (this.state.currentPage){
+      case "create": return <Menu changer = {this.changePage}><Create></Create></Menu>
+      case "list": return <Menu changer = {this.changePage}><List></List></Menu> 
+      case "search": return <Menu changer = {this.changePage}><Search></Search></Menu>
+      default: return <Menu changer = {this.changePage}><Create></Create></Menu>
+
     }
-    </>
-  );
+    
+  }
 }
+
+
+
 
 export default App;
