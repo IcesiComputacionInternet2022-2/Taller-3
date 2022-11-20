@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 class Create extends Component {
-  async handleOnSubmit(e) {
-    e.preventDefault();
-    const data = new FormData(e.target);
+  async createToucan(formData) {
+    formData.preventDefault();
+    const data = new FormData(formData.target);
     const toucanData = {
       fatherName: (data.get("fatherName") == '')?null: data.get("fatherName"),
       motherName: (data.get("motherName") == '')?null: data.get("motherName"),
@@ -26,7 +26,7 @@ class Create extends Component {
     const msg = await response.json();
     if (response.status === 200) {
       alert("Se ha creado el tucan exitosamente")
-      e.target.reset();
+      formData.target.reset();
     } else {
         alert(msg.message);
     }
@@ -35,7 +35,7 @@ class Create extends Component {
   render() {
     return (
       <div class="d-flex justify-content-center align-items-center h-100">
-        <form onSubmit={this.handleOnSubmit} autoComplete="off">
+        <form onSubmit={this.createToucan} autoComplete="off">
           <fieldset><legend>Datos del tucan</legend>
           <table>
           <tr>
