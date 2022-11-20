@@ -1,8 +1,9 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Card} from "./Card";
 import {Styles} from "../tailwind/Styles";
-import {Animal} from "../model/Animal";
+import {AnimalType} from "../model/AnimalType";
 import {AnimalRow} from "./AnimalRow";
+import {useNavigate} from "react-router-dom";
 
 const S = new Styles();
 
@@ -12,6 +13,7 @@ export const List = (
     }
 ) => {
 
+    const navigate = useNavigate();
     const [animals, setAnimals] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -22,6 +24,21 @@ export const List = (
                 setAnimals(data);
                 setLoading(false);
             })
+    }
+
+    const handleView = (e : React.MouseEvent<Element, MouseEvent>) => {
+        let animal;
+        try {
+            animal = ((e.target as HTMLDivElement).children[0] as HTMLBodyElement).innerHTML;
+        } catch (_) {
+            animal = (((e.target as HTMLButtonElement).parentElement as HTMLDivElement).parentElement as HTMLDivElement).children[0].innerHTML;
+        }
+        // console.log(animal);
+        navigate(`/${animal}`)
+    }
+
+    const handleDelete = (e : React.MouseEvent<Element, MouseEvent>) => {
+
     }
 
     useEffect(() => {
@@ -36,10 +53,10 @@ export const List = (
     }
 
     return (
-        <Card isForm={false} size={S.SEARCH_STYLES.listCardSize} color={S.SEARCH_STYLES.color} rounded={S.CARD_STYLES.rounded} spacing={S.SEARCH_STYLES.listCardSpacing}>
-            <h1 className={"font-semibold text-xl text-center"}>Animals</h1>
-            {animals.map((animal : Animal) =>
-                <AnimalRow animal={animal}/>
+        <Card flex={S.SEARCH_STYLES.listCardFlex} isForm={false} size={S.SEARCH_STYLES.listCardSize} color={S.SEARCH_STYLES.listCardColor} rounded={S.CARD_STYLES.rounded} spacing={S.SEARCH_STYLES.listCardSpacing}>
+            <h1 className={"font-semibold text-2xl text-center"}>Animals</h1>
+            {animals.map((animal : AnimalType) =>
+                <AnimalRow animal={animal} style={`${S.ROW.style} ${S.ROW.hover}`} onView={handleView} onDelete={handleDelete}/>
             )}
         </Card>
     );

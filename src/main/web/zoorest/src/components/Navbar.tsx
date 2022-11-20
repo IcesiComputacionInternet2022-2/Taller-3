@@ -1,10 +1,6 @@
 import {Link} from "react-router-dom";
 
-export const Navbar = (
-    props : {
-
-    }
-) => {
+export const Navbar = () => {
 
     const linkHoverStyle : string = "transition delay-250 ease-in hover:text-white hover:border-b-white hover:rounded-[0.35rem]";
     const linkFocusStyle : string = "focus:outline-none focus:border-b-white focus:rounded-[0.35rem] focus:text-white";

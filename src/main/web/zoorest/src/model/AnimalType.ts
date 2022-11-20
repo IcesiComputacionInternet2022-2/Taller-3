@@ -1,4 +1,4 @@
-export type Animal = {
+export type AnimalType = {
     'id' : string,
     'name': string,
     'sex': string,

@@ -27,15 +27,27 @@ export class Styles {
         'font' : 'text-[1rem] text-center',
     };
 
+    danger = 'focus:outline-none bg-red-600 text-white transition delay-250 ease-in hover:bg-red-100 hover:text-red-700 active:bg-red-700 active:text-red-200'
+    utility = 'focus:outline-none bg-amber-600 text-white transition delay-250 ease-in hover:bg-amber-100 hover:text-amber-700 active:bg-amber-700 active:text-amber-200'
+
     SEARCH_STYLES = {
-        'size' : 'h-[2rem] w-3/4',
-        'listCardSize' : 'h-auto w-3/4',
+        'size' : 'h-[2rem] w-full',
+        'listCardSize' : 'h-auto w-full',
         'listCardSpacing' : 'py-6 px-4',
-        'focus' : 'border-b-2 border-transparent transition ease-in-out delay-450 focus:border-solid focus:border-amber-700 focus:bg-orange-300 focus:drop-shadow-shine-field focus:placeholder-orange-600 focus:text-orange-800',
-        'color' : 'bg-orange-500 text-white placeholder-orange-100 c-type-orange autofill:bg-orange-500 autofill:text-white',
+        'listCardColor' : 'bg-orange-100',
+        'focus' : 'border-b-2 border-transparent transition ease-in-out delay-450 focus:border-solid focus:border-orange-700 focus:bg-orange-300 focus:drop-shadow-shine-field focus:placeholder-orange-600 focus:text-orange-800',
+        'color' : 'bg-orange-400 text-white placeholder-orange-800 c-type-orange autofill:bg-orange-500 autofill:text-white',
         'cardSize' : 'h-auto w-4/5',
         'cardSpacing' : 'py-6 mb-[6rem]',
-        'cardColor' : 'bg-transparent'
+        'cardColor' : 'bg-transparent',
+        'buttonSize' : 'w-24 h-[2rem]',
+        'listCardFlex': 'flex flex-col space-y-2'
+    }
+
+    ROW = {
+        'style' : 'focus:outline-none border-2 border-transparent focus:border-orange-700 flex flex-row justify-between items-center p-1 rounded-lg',
+        'hover' : 'transition delay-450 bounce-in-out hover:bg-orange-300 hover:-translate-y-1 hover:cursor-pointer',
+        'text' : 'text-center font-semibold text-base'
     }
 
     DATE_STYLES = {
