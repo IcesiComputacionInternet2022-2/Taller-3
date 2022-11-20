@@ -16,7 +16,7 @@ class List extends Component {
           this.setState({ toucans: toucans });
         },
         (error) => {
-          alert(error);
+          alert("No se encontraron datos");
         }
       );
   }

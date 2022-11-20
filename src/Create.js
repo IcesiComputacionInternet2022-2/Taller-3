@@ -38,11 +38,11 @@ class Create extends Component {
           <fieldset><legend>Datos del tucan</legend>
           <table>
           <tr>
-              <td><label>id del padre: </label></td>
+              <td><label>Nombre del padre: </label></td>
               <td><input type="text" id="fatherName" name="fatherName" class="form-control form-control-lg border border-dark"/></td>
             </tr>
             <tr>
-              <td><label>id de la madre: </label></td>
+              <td><label>Nombre de la madre: </label></td>
               <td><input type="text" id="motherName" name="motherName" class="form-control form-control-lg border border-dark"/></td>
             </tr>
             <tr>
@@ -53,7 +53,7 @@ class Create extends Component {
               <td><label>Sexo: </label></td>
               <td>
               <select id="sex" name="sex" class="form-select border border-dark" style={{ width: 345 + "px" }}>
-                <option value={"M"}>Macho</option> <option value={"H"}>Hembra</option>
+                <option value={"M"}>Macho</option> <option value={"F"}>Hembra</option>
               </select></td>
             </tr>
             <tr>

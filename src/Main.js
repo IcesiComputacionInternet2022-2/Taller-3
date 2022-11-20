@@ -8,26 +8,31 @@ import {
 import Create from "./Create";
 import List from "./List";
 import Search from "./Search";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 class Main extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
-          <h1>Zoologico de Cali</h1>
-          <ul className="header">
-            <li><NavLink to="/">Crear Tucan</NavLink></li>
-            <li><NavLink to="/list">Listar Tucanes</NavLink></li>
-            <li><NavLink to="/search">Buscar Tucan</NavLink></li>
-          </ul>
-          <div className="content">
-            <Routes>
-	      <Route exact path="/" element={<Create />} />
-              <Route path="/list" element={<List />} />
-	      <Route path="/search" element={<Search />} />
-            </Routes>
-	    </div>
-        </div>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="/">Zoo</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/">Crear Tucan</Nav.Link>
+            <Nav.Link href="/list">Listar Tucanes</Nav.Link>
+            <Nav.Link href="/search">Buscar Tucan</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <div className="content">
+                <Routes>
+                  <Route exact path="/" element={<Create />} />
+                  <Route path="/list" element={<List />} />
+                  <Route path="/search" element={<Search />} />
+                </Routes>
+              </div>
       </BrowserRouter>
     );
   }

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import InputGroup from 'react-bootstrap/InputGroup';
+
+
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -35,19 +39,16 @@ class Search extends Component {
   render() {
     return (
       <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm"></div>
-            <div class="col-sm">
-              <table>
-                <tr>
-                  <td><input id="name" type="text" placeholder="Nombre del tucan" autoComplete="off"/></td>
-                  <td><button type="button" onClick={this.findToucanAndParents}>Buscar</button></td>
-                </tr>
-              </table>
-            </div>
-            <div class="col-sm"></div>
-          </div>
+        <Container>
+          <Row>
+            <Col xs={4}></Col>
+            <Col>
+              <InputGroup>
+                <input id="name" type="text" placeholder="Nombre del tucan" autoComplete="off"/>
+                <button type="button" onClick={this.findToucanAndParents}>Buscar</button>
+              </InputGroup>
+            </Col>
+          </Row>
           <Row>
             {this.state.toucans.map((toucan) => (
               <Col>
@@ -90,7 +91,7 @@ class Search extends Component {
               </Col>
             ))}
           </Row>
-        </div>
+        </Container>
       </div>
     );
   }
