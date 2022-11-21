@@ -5,6 +5,8 @@ const age = document.querySelector('.age')
 const weight = document.querySelector('.weight')
 const height = document.querySelector('.height')
 const arrivalDate = document.querySelector('.arrivalDate')
+const fatherId = document.querySelector('.fatherId')
+const motherId = document.querySelector('.motherId')
 const create = document.querySelector('.create')
 const invalidName = document.querySelector('.invalidName')
 const invalidGender = document.querySelector('.invalidGender')
@@ -12,11 +14,14 @@ const invalidAge = document.querySelector('.invalidAge')
 const invalidWeight = document.querySelector('.invalidWeight')
 const invalidHeight = document.querySelector('.invalidHeight')
 const invalidArrivalDate = document.querySelector('.invalidArrivalDate')
+const invalidFatherId = document.querySelector('.invalidFatherId')
+const invalidMotherId = document.querySelector('.invalidMotherId')
 
 const expressions = {
     name: /^[a-zA-Z\s]{1,120}$/,
     age: /^[0-9]+$/,
-    float: /^([0-9]*[.])?[0-9]+$/
+    float: /^([0-9]*[.])?[0-9]+$/,
+    uuid: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 }
 
 window.onload = function onload() {
@@ -41,7 +46,7 @@ ostrich.addEventListener('change', () => {
 })
 
 function ostrichIsValid() {
-    return nameIsValid() && genderIsValid() && ageIsValid() && weightIsValid() && heightIsValid() && arrivalDateIsValid()
+    return nameIsValid() && genderIsValid() && ageIsValid() && weightIsValid() && heightIsValid() && arrivalDateIsValid() && fatherIdIsValid() && motherIdIsValid()
 }
 
 function nameIsValid() {
@@ -68,6 +73,14 @@ function arrivalDateIsValid() {
     return arrivalDate.value !== ''
 }
 
+function fatherIdIsValid() {
+    return fatherId.value === '' || expressions.uuid.test(fatherId.value)
+}
+
+function motherIdIsValid() {
+    return motherId.value === '' || expressions.uuid.test(motherId.value)
+}
+
 name.addEventListener('change', () => {
     nameIsValid() ? hiddenError(invalidName, name) : showError(invalidName, name, 'Invalid name: cannot be empty, maximum 120 characters and only letters and spaces are allowed.\'')
 })
@@ -90,6 +103,14 @@ height.addEventListener('change', () => {
 
 arrivalDate.addEventListener('change', () => {
     arrivalDateIsValid() ? hiddenError(invalidArrivalDate, arrivalDate) : showError(invalidArrivalDate, arrivalDate, 'Please select a date.')
+})
+
+fatherId.addEventListener('change', () => {
+    fatherIdIsValid() ? hiddenError(invalidFatherId, fatherId) : showError(invalidFatherId, fatherId, 'Please enter a valid UUID.')
+})
+
+motherId.addEventListener('change', () => {
+    motherIdIsValid() ? hiddenError(invalidMotherId, motherId) : showError(invalidMotherId, motherId, 'Please enter a valid UUID.')
 })
 
 function hiddenError(fieldInvalid, field) {
