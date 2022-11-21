@@ -1,0 +1,13 @@
+#table {
+    font-family: sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #table tr:hover {background-color: rgb(255, 255, 255);}
+  
+  #table th {
+    text-align: center;
+    background-color: #212068;
+    color: rgb(255, 255, 255);
+  }
