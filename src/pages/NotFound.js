@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default function() {
+export default function NotFound() {
         return (
             <div style={{margin: '3rem 6rem'}}>
                 <h1>Error 404:</h1>

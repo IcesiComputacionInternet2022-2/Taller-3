@@ -16,12 +16,21 @@ export default class Animals extends Component {
         this.animalService = new AnimalService()
     }
 
+    fetchData = async () => {
+        try{
+            await this.animalService.getAll().then(
+                data => this.setState({
+                    animalsData: data
+                })
+            )
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     componentDidMount(){
-        this.animalService.getAll().then(
-            data => this.setState({
-                animalsData: data
-            })
-        )
+        this.fetchData()
+
     }
 
     render() {
@@ -49,7 +58,7 @@ export default class Animals extends Component {
                                 <div className="AnimalCard__right__detail">
                                     <div className="line">
                                         <div>Name: {animal.name}</div>
-                                        <div>Sex: {animal.gender}</div>
+                                        <div>Gender: {animal.gender}</div>
                                         <div>Age: {animal.age}y</div>
                                     </div>
                                     <div className="line">

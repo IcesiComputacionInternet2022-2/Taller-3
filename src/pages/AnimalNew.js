@@ -3,20 +3,25 @@ import React, { Component } from 'react';
 import './styles/AnimalNew.css'
 
 import {Link} from 'react-router-dom';
+import { AnimalService } from '../service/AnimalService';
 
 export default class AnimalNew extends Component {
 
-    state = {
-        animal:{
-            name:'',
-            gender:'',
-            age:'',
-            weight:'',
-            height:'',
-            arrivalDate:'',
-            fatherId:'',
-            motherId:''
+    constructor(){
+        super()
+        this.state = {
+            animal:{
+                name:'',
+                gender:'',
+                age:'',
+                weight:'',
+                height:'',
+                arrivalDate:'',
+                fatherId:'',
+                motherId:''
+            }
         }
+        this.animalService = new AnimalService()
     }
 
     handleChange = (e) => {
@@ -30,8 +35,15 @@ export default class AnimalNew extends Component {
 
     }
 
-    handleSubmit = (e) => {
-        console.log(">>> Enviado")
+    handleSubmit = async e => {
+        e.preventDefault()
+
+        try{
+            await this.animalService.create(this.state.animal)
+        }catch(e){
+            console.log(e)
+        }
+
     }
 
 
@@ -39,7 +51,7 @@ export default class AnimalNew extends Component {
         return (
             <div className='NewCard'>
 
-                <form onSubmit={this.handleSubmit} className="formCard">
+                <form className="formCard" onSubmit={this.handleSubmit}>
                     <h2>Add Animal</h2>
 
                     <div className="form-group">
@@ -125,6 +137,7 @@ export default class AnimalNew extends Component {
 
                 <div className="buttons">
                     <Link className='btn btn-secondary' to="/">Cancel</Link>
+                    <button className='btn btn-primary' >Apply</button>
                     <Link className='btn btn-primary' to="/">Save</Link>
                 </div>
                 </form>
