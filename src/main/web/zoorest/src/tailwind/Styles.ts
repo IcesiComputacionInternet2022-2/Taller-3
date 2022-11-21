@@ -3,7 +3,9 @@ export class Styles {
     flexAll : string = "flex flex-col items-center space-y-2";
     selectedButton : string = "bg-orange-300";
     unselectedButton : string = "bg-orange-500";
-    
+    inlineLink : string = "underline transition delay-250 ease-in hover:text-orange-600";
+    listItem : string = "c-type-orange font-medium text-center w-full transition delay-150 ease-in-out hover:bg-orange-300 hover:-translate-y-1 rounded-lg";
+
     CARD_STYLES = {
         'size': 'w-[22rem] h-[40rem]',
         'rounded' : 'rounded-lg',

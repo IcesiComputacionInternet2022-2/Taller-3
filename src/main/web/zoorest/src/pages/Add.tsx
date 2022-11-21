@@ -120,7 +120,7 @@ export const Add = () => {
     }
 
     return (
-        <div className={"flex flex-col justify-center items-center space-x-4 mb-[3rem]"}>
+        <div className={"flex flex-col justify-center items-center space-x-4 mb-[2rem]"}>
             <Card isForm={true} onSubmit={handleSubmit} flex={S.flexAdd} rounded={S.CARD_STYLES.rounded} size={S.CARD_STYLES.size} color={S.CARD_STYLES.color} shadow={S.CARD_STYLES.shadow}>
                 <Input id={"new-name"} type={"text"} placeHolder={"Name"} focus={S.INPUT_STYLES.focus} rounded={S.INPUT_STYLES.rounding} size={S.INPUT_STYLES.size} font={S.INPUT_STYLES.font} color={S.INPUT_STYLES.color} onChange={handleChange}/>
                 <ToggleButton title={"Sex"} size={2} labels={S.TOGGLE_STYLES.labels} colors={S.TOGGLE_STYLES.colors} buttonSizes={S.TOGGLE_STYLES.sizes} onClick={toggleFunction} background={S.TOGGLE_STYLES.background} hover={S.TOGGLE_STYLES.hover}/>

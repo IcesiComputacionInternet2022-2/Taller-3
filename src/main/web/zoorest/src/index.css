@@ -4,11 +4,11 @@
 
 @layer components {
 
-    .c-type-orange::selection {
+    .c-type-orange::selection, .c-type-orange *::selection{
         background-color: #FFEDD5FF;
     }
 
-    .c-type-gray::selection {
-        background-color: floralwhite;
+    .c-type-orange-dark::selection, .c-type-orange-dark *::selection {
+        background-color: #FAAE85FF;
     }
 }
