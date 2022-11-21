@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+
+import './styles/Animals.css'
+
 import { AnimalService } from '../service/AnimalService';
+import jaribuPhoto from '../images/jaribuIRL.jpg'
 
 export default class Animals extends Component {
 
-    state ={}
+    state ={
+        animalsData: []
+    }
 
     constructor(){
         super()
-        this.setState = {}
         this.animalService = new AnimalService()
     }
 
@@ -21,40 +26,38 @@ export default class Animals extends Component {
 
     render() {
 
-        // if(this.props.animalsData.length === 0){
-        //     return(
-        //         <div>
-        //             <h2>Animal's List</h2>
-        //             <h4>No Animals were found</h4>
-        //         </div>
-        //     )
-        // }
+        if(this.state.animalsData.length === 0){
+            return(
+                <div>
+                    <h2>Animal's List</h2>
+                    <h4>No Animals were found</h4>
+                </div>
+            )
+        }
 
         return (
             <div className='Animals'>
                 <h2>Animal's List</h2>
                 <ul className='list-unstyled'>
-                    {this.props.animalsData.map((animal) => {
+                    {this.state.animalsData.map((animal) => {
                         return(
                             <li key={animal.id} className="AnimalCard">
                                 <div className="AnimalCard__left__image-date">
-                                    <img src="" alt="jaribu img" />
-                                    <p>Since {animal.arrivalDate}</p>
+                                    <img src={jaribuPhoto} alt="jaribu img" />
+                                    <p>{animal.arrivalDate}</p>
                                 </div>
                                 <div className="AnimalCard__right__detail">
-                                    <div className="AnimalCard__name-gender-age">
-                                        <p>Name: {animal.name}</p>
-                                        <p>Gender: {animal.gender}</p>
-                                        <p>{animal.age} years</p>
+                                    <div className="line">
+                                        <div>Name: {animal.name}</div>
+                                        <div>Sex: {animal.gender}</div>
+                                        <div>Age: {animal.age}y</div>
                                     </div>
-                                    <div className="AnimalCard__height-weight">
-                                        <p>Height: {animal.height}</p>
-                                        <p>weight: {animal.weight}</p>
+                                    <div className="line">
+                                        <div>Height: {animal.height} cm</div>
+                                        <div>Weight: {animal.weight} lbs</div>
                                     </div>
-                                    <div className="AnimalCard__parents">
-                                        <p>Father: {animal.fatherId}</p>
-                                        <p>Father: {animal.motherId}</p>
-                                    </div>
+                                    <div className='line parentTxt'>Father Id: {animal.fatherId || "No data"}</div>
+                                    <div className='line parentTxt'>Mother Id: {animal.motherId || "No data"}</div>
                                 </div>
                             </li>
                         )

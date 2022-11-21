@@ -1,0 +1,47 @@
+.Animals{
+    margin-left: 6rem;
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+
+.AnimalCard{
+    background: #f4f4f7;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+	margin-bottom: 1rem;
+	border-radius: 8px 8px 8px 8px;
+	display: flex;
+	padding: 1rem;
+	width: fit-content; 
+}
+
+.AnimalCard__left__image-date>img{
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.AnimalCard__left__image-date>p{
+    width: 4rem;
+    margin: 0;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: xx-small;
+}
+
+.AnimalCard__right__detail{
+    width: 350px;
+    margin-left: 1rem;
+}
+
+.line{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem;
+    margin-top: 0;
+    font-size: small;
+}
+
+.parent{
+    font-size: x-small;
+}
+

@@ -124,8 +124,8 @@ export default class AnimalNew extends Component {
                     </div>
 
                 <div className="buttons">
-                    <Link className='btn btn-secondary'>Cancel</Link>
-                    <Link className='btn btn-primary'>Save</Link>
+                    <Link className='btn btn-secondary' to="/">Cancel</Link>
+                    <Link className='btn btn-primary' to="/">Save</Link>
                 </div>
                 </form>
             </div>

@@ -45,9 +45,8 @@ export default class Home extends Component {
                     <div className="container">
                         <div className="row">
                             {cards.map(card => (
-                                <div className="col-4">
+                                <div key={card.key} className="col-4">
                                     <HomeCard
-                                        key={card.id}
                                         title={card.title} 
                                         imgIcon={card.imgIcon}
                                         description={card.description}

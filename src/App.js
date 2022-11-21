@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Animals from './pages/Animals'
 import AnimalNew from './pages/AnimalNew'
 import AnimalSearch from './pages/AnimalSearch'
+import NotFound from './pages/NotFound'
 
 export default class App extends Component {
 
@@ -18,6 +19,7 @@ export default class App extends Component {
             <Route path="/animals" element={<Animals/>}/>
             <Route path="/animals/new" element={<AnimalNew/>}/>
             <Route path="/animals/search" element={<AnimalSearch/>}/>
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
         </Layout>
       </BrowserRouter>

@@ -27,7 +27,7 @@ export default class HomeCard extends Component{
                         <h4>{title}</h4>
                     </div>
                 </div>
-                <p>{description}</p>
+                <p className="description">{description}</p>
                 <Link to={buttonPath} className="btn btn-primary">{buttonText}</Link>
             </div>
         );

@@ -4,21 +4,18 @@
     border-radius: 8px 8px 8px 8px;
     overflow: hidden;
     height: 250px;
-    width: 400px;
+    width: 380px;
     text-align: center;
+    padding: 2rem;
 }
 
-.HomeCard__title{
-    margin-top: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    text-align: center;
+.HomeCard>h4{
+    margin-bottom: 0;
 }
 
 .child{
     display: inline-block;
-    border: 8px;
-    padding: 0.5rem 0.5rem;
+    margin-right: 1rem;
     vertical-align: middle;
 }
 
@@ -26,7 +23,7 @@
     height: 1.8rem;
 }
 
-p{
+.description{
     text-align: justify;
     margin-top: 1rem;
     margin-left: 2rem;
@@ -34,6 +31,7 @@ p{
 }
 
 .btn{
+    margin: 0;
     width: 10rem;
     font-size: medium;
     background-color: #a5b84f;
