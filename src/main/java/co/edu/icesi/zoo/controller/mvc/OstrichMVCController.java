@@ -26,23 +26,32 @@ public class OstrichMVCController {
 
     @GetMapping("/createOstrich")
     public String createOstrich(Model model) {
-        model.addAttribute("Ostrich", OstrichDTO.builder().build());
+        model.addAttribute("ostrich", OstrichDTO.builder().gender(-1).age(-1).weight(-1).height(-1).build());
         return "CreateOstrich";
     }
 
+    @GetMapping("/validation")
+    public String validationRedirect() {
+        return "redirect:/createOstrich";
+    }
+
     @PostMapping("/validation")
-    public String ostrichValidation(@ModelAttribute("Ostrich") OstrichDTO ostrichDTO, BindingResult result, Model model) {
-        try {
-            System.out.println(ostrichDTO);
-            ostrichRestController.createOstrich(ostrichDTO);
-            model.addAttribute("Status", "success");
-            model.addAttribute("Title", "Ostrich Created");
-            model.addAttribute("Message", "Ostrich created successfully ");
-        } catch (OstrichException e) {
-            model.addAttribute("Status", "error");
-            model.addAttribute("Title", e.getError().getCode());
-            model.addAttribute("Message", e.getError().getMessage());
+    public String ostrichValidation(@ModelAttribute("ostrich") OstrichDTO ostrichDTO, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            return "CreateOstrich";
+        } else {
+            try {
+                System.out.println(ostrichDTO);
+                ostrichRestController.createOstrich(ostrichDTO);
+                model.addAttribute("Status", "success");
+                model.addAttribute("Title", "Ostrich Created");
+                model.addAttribute("Message", "Ostrich created successfully ");
+            } catch (OstrichException e) {
+                model.addAttribute("Status", "error");
+                model.addAttribute("Title", e.getError().getCode());
+                model.addAttribute("Message", e.getError().getMessage());
+            }
+            return "CreateOstrich";
         }
-        return  "CreateOstrich";
     }
 }
