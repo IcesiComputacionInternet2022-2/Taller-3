@@ -24,7 +24,7 @@ const expressions = {
     uuid: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 }
 
-window.onload = function onload() {
+function onloadCreate() {
     if(ostrichIsValid()) {
         tooltipList[0].disable()
         create.disabled = false
@@ -82,7 +82,7 @@ function motherIdIsValid() {
 }
 
 name.addEventListener('change', () => {
-    nameIsValid() ? hiddenError(invalidName, name) : showError(invalidName, name, 'Invalid name: cannot be empty, maximum 120 characters and only letters and spaces are allowed.\'')
+    nameIsValid() ? hiddenError(invalidName, name) : showError(invalidName, name, 'Invalid name: cannot be empty, maximum 120 characters and only letters and spaces are allowed.')
 })
 
 gender.addEventListener('change', () => {
@@ -112,15 +112,3 @@ fatherId.addEventListener('change', () => {
 motherId.addEventListener('change', () => {
     motherIdIsValid() ? hiddenError(invalidMotherId, motherId) : showError(invalidMotherId, motherId, 'Please enter a valid UUID.')
 })
-
-function hiddenError(fieldInvalid, field) {
-    fieldInvalid.innerHTML = ''
-    fieldInvalid.classList.add('hidden')
-    field.classList.remove('is-invalid')
-}
-
-function showError(fieldInvalid, field, text) {
-    fieldInvalid.innerHTML = text
-    fieldInvalid.classList.remove('hidden')
-    field.classList.add('is-invalid')
-}

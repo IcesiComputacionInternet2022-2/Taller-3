@@ -2,10 +2,7 @@ package co.edu.icesi.zoo.controller.mvc;
 
 import co.edu.icesi.zoo.controller.rest.OstrichRestController;
 import co.edu.icesi.zoo.dto.OstrichDTO;
-import co.edu.icesi.zoo.error.exception.OstrichError;
 import co.edu.icesi.zoo.error.exception.OstrichException;
-import co.edu.icesi.zoo.mapper.OstrichMapper;
-import co.edu.icesi.zoo.service.OstrichService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,7 +23,7 @@ public class OstrichMVCController {
     @GetMapping("/createOstrich")
     public String createOstrich(Model model) {
         model.addAttribute("ostrich", OstrichDTO.builder().gender(-1).age(-1).weight(-1).height(-1).build());
-        return "CreateOstrich";
+        return "create";
     }
 
     @GetMapping("/validation")
@@ -37,21 +33,42 @@ public class OstrichMVCController {
 
     @PostMapping("/validation")
     public String ostrichValidation(@ModelAttribute("ostrich") OstrichDTO ostrichDTO, BindingResult result, Model model) {
-        if(result.hasErrors()){
-            return "CreateOstrich";
-        } else {
+        if (!result.hasErrors()) {
             try {
-                System.out.println(ostrichDTO);
                 ostrichRestController.createOstrich(ostrichDTO);
-                model.addAttribute("Status", "success");
-                model.addAttribute("Title", "Ostrich Created");
-                model.addAttribute("Message", "Ostrich created successfully ");
+                model.addAttribute("icon", "success");
+                model.addAttribute("title", "Ostrich Created");
+                model.addAttribute("text", "Ostrich created successfully");
             } catch (OstrichException e) {
-                model.addAttribute("Status", "error");
-                model.addAttribute("Title", e.getError().getCode());
-                model.addAttribute("Message", e.getError().getMessage());
+                model.addAttribute("icon", "error");
+                model.addAttribute("title", e.getError().getCode());
+                model.addAttribute("text", e.getError().getMessage());
             }
-            return "CreateOstrich";
         }
+        return "create";
+    }
+
+    @GetMapping("/search")
+    public String getSearch(Model model) {
+        model.addAttribute("parameter", "");
+        return "search";
+    }
+
+    @PostMapping("/search")
+    public String postSearch(@ModelAttribute("parameter") String parameter, Model model) {
+        try {
+            List<OstrichDTO> ostrichResult;
+            if(parameter.contains("-"))
+                ostrichResult = List.of(ostrichRestController.getOstrichById(UUID.fromString(parameter)));
+            else
+                ostrichResult = ostrichRestController.getOstrichByName(parameter);
+            System.out.println(ostrichResult);
+            model.addAttribute("ostrichResult", ostrichResult);
+        } catch (OstrichException e) {
+            model.addAttribute("icon", "error");
+            model.addAttribute("title", e.getError().getCode());
+            model.addAttribute("text", e.getError().getMessage());
+        }
+        return "search";
     }
 }
