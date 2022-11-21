@@ -1,0 +1,36 @@
+.Navbar{
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.Navbar__brand{
+    margin-top: 4rem;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+.Navbar__brand:hover{
+    margin-top: 4rem;
+    padding: 1rem;
+    text-decoration: underline;
+    align-self: center;
+}
+
+.container-fluid{
+    /* align-content: center; */
+    vertical-align: middle;
+}
+
+.reserva_span{
+    color: #CE333A;
+}
+
+.jaribu_span{
+    color: #454553;
+}
+
+.brand-logo{
+    padding-right: 1rem;
+    border-radius: 50%;
+    height: 3rem;
+}

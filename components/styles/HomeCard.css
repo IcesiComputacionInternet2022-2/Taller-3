@@ -1,0 +1,46 @@
+.HomeCard{
+    background: #F4F4F7;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 8px 8px 8px 8px;
+    overflow: hidden;
+    height: 250px;
+    width: 400px;
+    text-align: center;
+}
+
+.HomeCard__title{
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.child{
+    display: inline-block;
+    border: 8px;
+    padding: 0.5rem 0.5rem;
+    vertical-align: middle;
+}
+
+.CardIcon{
+    height: 1.8rem;
+}
+
+p{
+    text-align: justify;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+.btn{
+    width: 10rem;
+    font-size: medium;
+    background-color: #a5b84f;
+    border: 0;
+}
+
+.btn:hover{
+    background-color: #909D59 ;
+}
+
