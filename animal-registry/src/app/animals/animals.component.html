@@ -1,0 +1,48 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Animals</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">List of Animals</h5>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/animals/form']">
+          Register Animal
+        </button>
+      </div>
+      <div *ngIf="animals?.length == 0" class="alert alert-info">
+        The database is empty
+      </div>
+      <table class="table table-bordered table-striped" *ngIf="animals?.length>0">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>sex</th>
+            <th>weight</th>
+            <th>height</th>
+            <th>age</th>
+            <th>
+              edit
+            </th>
+            <th>delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let animal of animals">
+            <td>{{ animal.id }}</td>
+            <td>{{ animal.name }}</td>
+            <td>{{ animal.sex }}</td>
+            <td>{{ animal.weight }}</td>
+            <td>{{ animal.height }}</td>
+            <td>{{ animal.age }}</td>
+            <td>
+              <button type="button" name="edit" [routerLink]="['/animals/form', animal.id]" class="btn btn-primary btn-sm">edit</button>
+            </td>
+            <td>
+              <button type="button" name="delete" (click)='delete(animal)' class="btn btn-danger btn-sm">delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+  
