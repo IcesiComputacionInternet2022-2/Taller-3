@@ -1,9 +1,10 @@
 import {Box, Typography} from "@mui/material";
 import TableWithData from "./TableWithData";
+import SearchByName from "./SearchByName";
 
 export default function ListOnTable() {
     return (
-        <Box component={"div"} sx={{height: '94vh'}}>
+        <Box component={"div"} sx={{height: '100vh'}}>
             <Box component={"div"} bgcolor={"brown.main"} sx={{display: 'flex', height: '45%'}}>
                 <Box component={"article"} style={{
                     display: 'flex',
@@ -30,7 +31,8 @@ export default function ListOnTable() {
                     </Box>
                 </Box>
             </Box>
-            <Box component={'div'} bgcolor={"rose.main"} sx={{height: '55%'}}>
+            <Box component={'div'} bgcolor={"rose.main"} sx={{height: '55%', display: 'grid'}}>
+                <SearchByName/>
                 <TableWithData/>
             </Box>
         </Box>

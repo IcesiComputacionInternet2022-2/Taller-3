@@ -41,25 +41,6 @@ export default function FlexCards() {
                     </CardContent>
                 </CardActionArea>
             </Card>
-            <Card elevation={0} sx={{maxWidth: 345}}>
-                <CardActionArea href={"/search"}>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image="https://wallpaperaccess.com/thumb/4037977.jpg"
-                        alt="bear waving"
-                    />
-                    <CardContent style={{textAlign: 'justify'}}>
-                        <Typography gutterBottom variant="h5" component="div" sx={{flexGrow: 1, fontFamily: 'Roboto'}}>
-                            Buscar Animal
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{flexGrow: 1, fontFamily: 'Roboto'}}>
-                            Dado el nombre de un ejemplar se permite buscar su información
-                            de una manera completa.
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
         </Box>
     );
 }

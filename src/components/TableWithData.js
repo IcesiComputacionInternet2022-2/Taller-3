@@ -192,7 +192,7 @@ export default function TableWithData() {
         fetchAnimals()
     }, [])
     return (
-        <Box component={"div"} sx={{height: '100%', display: 'grid', justifyContent: 'center'}}>
+        <Box component={"div"} sx={{maxHeight: '80%', display: 'grid', justifyContent: 'center'}}>
             {TableConst(data)}
         </Box>
     );
