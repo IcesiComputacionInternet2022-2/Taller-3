@@ -71,4 +71,9 @@ public class OstrichMVCController {
         model.addAttribute("ostriches", ostrichRestController.getOstriches());
         return "list";
     }
+
+    @GetMapping("/index")
+    public String getIndex() {
+        return "index";
+    }
 }
