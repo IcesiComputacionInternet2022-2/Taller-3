@@ -20,18 +20,13 @@ public class OstrichMVCController {
 
     private final OstrichRestController ostrichRestController;
 
-    @GetMapping("/createOstrich")
+    @GetMapping("/create")
     public String createOstrich(Model model) {
         model.addAttribute("ostrich", OstrichDTO.builder().gender(-1).age(-1).weight(-1).height(-1).build());
         return "create";
     }
 
-    @GetMapping("/validation")
-    public String validationRedirect() {
-        return "redirect:/createOstrich";
-    }
-
-    @PostMapping("/validation")
+    @PostMapping("/create")
     public String ostrichValidation(@ModelAttribute("ostrich") OstrichDTO ostrichDTO, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             try {
@@ -57,18 +52,23 @@ public class OstrichMVCController {
     @PostMapping("/search")
     public String postSearch(@ModelAttribute("parameter") String parameter, Model model) {
         try {
-            List<OstrichDTO> ostrichResult;
+            List<OstrichDTO> list;
             if(parameter.contains("-"))
-                ostrichResult = List.of(ostrichRestController.getOstrichById(UUID.fromString(parameter)));
+                list = List.of(ostrichRestController.getOstrichById(UUID.fromString(parameter)));
             else
-                ostrichResult = ostrichRestController.getOstrichByName(parameter);
-            System.out.println(ostrichResult);
-            model.addAttribute("ostrichResult", ostrichResult);
+                list = ostrichRestController.getOstrichByName(parameter);
+            model.addAttribute("list", list);
         } catch (OstrichException e) {
             model.addAttribute("icon", "error");
             model.addAttribute("title", e.getError().getCode());
             model.addAttribute("text", e.getError().getMessage());
         }
         return "search";
+    }
+
+    @GetMapping("/list")
+    public String getList(Model model) {
+        model.addAttribute("ostriches", ostrichRestController.getOstriches());
+        return "list";
     }
 }
