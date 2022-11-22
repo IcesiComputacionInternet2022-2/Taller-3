@@ -3,40 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Thymeleaf Error Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/image/icon.ico}" rel="icon" type="image/icon type">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 </head>
 <body>
-    <h1>Thymeleaf Error Page</h1>
-    <table>
-        <tr>
-            <td>Date</td>
-            <td th:text="${timestamp}"/>
-        </tr>
-        <tr>
-            <td>Path</td>
-            <td th:text="${path}"/>
-        </tr>
-        <tr>
-            <td>Error</td>
-            <td th:text="${error}"/>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td th:text="${status}"/>
-        </tr>
-        <tr>
-            <td>Message</td>
-            <td th:text="${message}"/>
-        </tr>
-        <tr>
-            <td>Exception</td>
-            <td th:text="${exception}"/>
-        </tr>
-        <tr>
-            <td>Trace</td>
-            <td>
-                <pre th:text="${trace}"/>
-            </td>
-        </tr>
-    </table>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div class="body-wrapper">
+        <section class="d-flex justify-content-center align-items-center bg">
+            <div class="card menu">
+                <div class="d-flex flex-column p-3">
+                    <h2 class="card-title main">Thymeleaf Error Page</h2>
+                    <div class="menu__container">
+                        <div class="container">
+                            <form method="get" th:action="@{/index}">
+                                <div class="form-group p-2" th:if="${timestamp!=null}">
+                                    <label for="timestamp" class="label">Timestamp</label>
+                                    <input type="text" name="timestamp" class="form-control timestamp" aria-label="Username" th:value="${timestamp}" disabled/>
+                                </div>
+                                <div class="form-group p-2" th:if="${path!=null}">
+                                    <label for="path" class="label">Path</label>
+                                    <input type="text" name="path" class="form-control path" aria-label="Username" th:value="${path}" disabled/>
+                                </div>
+                                <div class="form-group p-2" th:if="${error!=null}">
+                                    <label for="error" class="label">Error</label>
+                                    <input type="text" name="error" class="form-control error" aria-label="Username" th:value="${error}" disabled/>
+                                </div>
+                                <div class="form-group p-2" th:if="${status!=null}">
+                                    <label for="status" class="label">Status</label>
+                                    <input type="text" name="status" class="form-control status" aria-label="Username" th:value="${status}" disabled/>
+                                </div>
+                                <div class="form-group p-2" th:if="${message!=null}">
+                                    <label for="message" class="label">Message</label>
+                                    <input type="text" name="message" class="form-control message" aria-label="Username" th:value="${message}" disabled/>
+                                </div>
+                                <div class="form-group p-2" th:if="${exception!=null}">
+                                    <label for="exception" class="label">Exception</label>
+                                    <input type="text" name="exception" class="form-control exception" aria-label="Username" th:value="${exception}" disabled/>
+                                </div>
+                                <div class="form-group p-2" th:if="${trace!=null}">
+                                    <label for="trace" class="label">Trace</label>
+                                    <input type="text" name="trace" class="form-control trace" aria-label="Username" th:value="${trace}" disabled/>
+                                </div>
+                                <br/>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-block">Go to index</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

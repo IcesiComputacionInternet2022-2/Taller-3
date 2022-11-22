@@ -21,37 +21,37 @@
                         <div class="container">
                             <form>
                                 <div class="form-group p-2">
-                                    <label for="id" class="label idLabel">ID</label>
-                                    <input type="text" name="id" class="form-control id" th:value="${ostrich.id}" readonly/>
+                                    <label for="id" class="label">ID</label>
+                                    <input type="text" name="id" class="form-control id" aria-label="Username" th:value="${ostrich.id}" readonly/>
                                 </div>
                                 <div class="form-group p-2">
                                     <label for="gender" class="label">Gender</label>
-                                    <input type="text" name="gender" class="form-control gender" th:if="${ostrich.gender == 0}" value="Female" readonly/>
-                                    <input type="text" name="gender" class="form-control gender" th:if="${ostrich.gender == 1}" value="Male" readonly/>
+                                    <input type="text" name="gender" class="form-control gender" aria-label="Username" th:if="${ostrich.gender == 0}" value="Female" readonly/>
+                                    <input type="text" name="gender" class="form-control gender" aria-label="Username" th:if="${ostrich.gender == 1}" value="Male" readonly/>
                                 </div>
                                 <div class="form-group p-2">
                                     <label for="age" class="label">Age</label>
-                                        <input type="number" class="form-control age" th:value="${ostrich.age}" readonly>
+                                        <input type="number" class="form-control age" aria-label="Username" th:value="${ostrich.age}" readonly>
                                 </div>
                                 <div class="form-group p-2">
                                     <label for="weight" class="label">Weight</label>
-                                    <input type="number" class="form-control weight" th:value="${ostrich.weight}" readonly>
+                                    <input type="number" class="form-control weight" aria-label="Username" th:value="${ostrich.weight}" readonly>
                                 </div>
                                 <div class="form-group p-2">
                                     <label for="height" class="label">Height</label>
-                                    <input type="number" class="form-control height" th:value="${ostrich.height}" readonly>
+                                    <input type="number" class="form-control height" aria-label="Username" th:value="${ostrich.height}" readonly>
                                 </div>
                                 <div class="form-group p-2">
                                     <label for="arrivalDate" class="label">Arrival Date</label>
-                                    <input type="datetime-local" step="1" class="form-control arrivalDate" th:value="${ostrich.arrivalDate}" readonly>
+                                    <input type="datetime-local" step="1" class="form-control arrivalDate" aria-label="Username" th:value="${ostrich.arrivalDate}" readonly>
                                 </div>
                                 <div class="form-group p-2" th:if="${ostrich.fatherId!=null}">
                                     <label for="fatherId" class="label">Father ID</label>
-                                    <input type="text" class="form-control fatherId" th:value="${ostrich.fatherId}" readonly/>
+                                    <input type="text" class="form-control fatherId" aria-label="Username" th:value="${ostrich.fatherId}" readonly/>
                                 </div>
                                 <div class="form-group p-2" th:if="${ostrich.motherId!=null}">
                                     <label for="motherId" class="label">Mother ID</label>
-                                    <input type="text" class="form-control motherId" th:value="${ostrich.motherId}" readonly/>
+                                    <input type="text" class="form-control motherId" aria-label="Username" th:value="${ostrich.motherId}" readonly/>
                                 </div>
                             </form>
                         </div>
