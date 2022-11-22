@@ -1,7 +1,6 @@
 package co.edu.icesi.zoo.error.exception;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 @Getter

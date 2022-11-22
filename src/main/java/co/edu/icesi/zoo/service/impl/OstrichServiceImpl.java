@@ -54,13 +54,13 @@ public class OstrichServiceImpl implements OstrichService {
 	}
 
 	private void validateFatherGenre(Ostrich ostrich) {
-		if (ostrich.getFatherId() != null && ostrichRepository.findById(ostrich.getFatherId()).get().getGender() != OstrichConstant.GENDER.getMax()) {
+		if (ostrich.getFatherId() != null && ostrichRepository.findById(ostrich.getFatherId()).isPresent() && ostrichRepository.findById(ostrich.getFatherId()).get().getGender() != OstrichConstant.GENDER.getMax()) {
 			throw new OstrichException(HttpStatus.BAD_REQUEST, new OstrichError(OstrichErrorCode.CODE_11.name(), OstrichErrorCode.CODE_11.getMessage()));
 		}
 	}
 	
 	private void validateMotherGenre(Ostrich ostrich) {
-		if (ostrich.getMotherId() != null && ostrichRepository.findById(ostrich.getMotherId()).get().getGender() != OstrichConstant.GENDER.getMin()) {
+		if (ostrich.getMotherId() != null && ostrichRepository.findById(ostrich.getMotherId()).isPresent() && ostrichRepository.findById(ostrich.getMotherId()).get().getGender() != OstrichConstant.GENDER.getMin()) {
 			throw new OstrichException(HttpStatus.BAD_REQUEST, new OstrichError(OstrichErrorCode.CODE_12.name(), OstrichErrorCode.CODE_12.getMessage()));
 		}
 	}
@@ -74,14 +74,12 @@ public class OstrichServiceImpl implements OstrichService {
     public List<Ostrich> getOstrichByName(String ostrichName) {
     	List<Ostrich> ostriches = new ArrayList<>();
     	ostriches.add(ostrichRepository.findByName(ostrichName).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_13.name(), OstrichErrorCode.CODE_13.getMessage()))));
-    	if(ostriches.get(0) != null) {
-    		if(ostriches.get(0).getFatherId() != null) {
-    			ostriches.add(ostrichRepository.findById(ostriches.get(0).getFatherId()).get());
-    		}
-    		if(ostriches.get(0).getMotherId() != null) {
-    			ostriches.add(ostrichRepository.findById(ostriches.get(0).getMotherId()).get());
-    		}
-    	}
+    	if(ostriches.get(0).getFatherId() != null) {
+			ostriches.add(ostrichRepository.findById(ostriches.get(0).getFatherId()).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_10.name(), OstrichErrorCode.CODE_10.getMessage()))));
+		}
+		if(ostriches.get(0).getMotherId() != null) {
+			ostriches.add(ostrichRepository.findById(ostriches.get(0).getMotherId()).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_10.name(), OstrichErrorCode.CODE_10.getMessage()))));
+		}
         return ostriches;
     }
 

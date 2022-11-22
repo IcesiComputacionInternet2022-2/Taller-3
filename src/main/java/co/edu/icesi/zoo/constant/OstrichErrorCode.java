@@ -21,5 +21,5 @@ public enum OstrichErrorCode {
 	CODE_12("Mother's gender is not female"),
 	CODE_13("Ostrich not found");
 
-    private String message;
+    private final String message;
 }

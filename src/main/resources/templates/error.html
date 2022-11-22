@@ -22,7 +22,7 @@
                             <form method="get" th:action="@{/index}">
                                 <div class="form-group p-2" th:if="${timestamp!=null}">
                                     <label for="timestamp" class="label">Timestamp</label>
-                                    <input type="text" name="timestamp" class="form-control timestamp" aria-label="Username" th:value="${timestamp}" disabled/>
+                                    <input type="datetime-local" step="1" name="timestamp" class="form-control timestamp" aria-label="Username" th:value="${timestamp}" disabled>
                                 </div>
                                 <div class="form-group p-2" th:if="${path!=null}">
                                     <label for="path" class="label">Path</label>
@@ -35,18 +35,6 @@
                                 <div class="form-group p-2" th:if="${status!=null}">
                                     <label for="status" class="label">Status</label>
                                     <input type="text" name="status" class="form-control status" aria-label="Username" th:value="${status}" disabled/>
-                                </div>
-                                <div class="form-group p-2" th:if="${message!=null}">
-                                    <label for="message" class="label">Message</label>
-                                    <input type="text" name="message" class="form-control message" aria-label="Username" th:value="${message}" disabled/>
-                                </div>
-                                <div class="form-group p-2" th:if="${exception!=null}">
-                                    <label for="exception" class="label">Exception</label>
-                                    <input type="text" name="exception" class="form-control exception" aria-label="Username" th:value="${exception}" disabled/>
-                                </div>
-                                <div class="form-group p-2" th:if="${trace!=null}">
-                                    <label for="trace" class="label">Trace</label>
-                                    <input type="text" name="trace" class="form-control trace" aria-label="Username" th:value="${trace}" disabled/>
                                 </div>
                                 <br/>
                                 <div class="d-grid gap-2">

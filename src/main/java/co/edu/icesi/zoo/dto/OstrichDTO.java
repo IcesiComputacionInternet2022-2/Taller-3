@@ -6,11 +6,8 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Data
 @Builder
