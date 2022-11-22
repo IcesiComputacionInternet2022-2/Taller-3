@@ -210,7 +210,7 @@ public class ZooCreateOstrichTests {
         baseOstrich.setName("Invalid Ostrich");
         baseOstrich.setFatherId(UUID.fromString("59b99314-ed1a-4678-ab05-463b186c10c2"));
         String body = objectMapper.writeValueAsString(baseOstrich);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/ostrich").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/ostrich").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isNotFound()).andReturn();
         OstrichError exceptionResult = objectMapper.readValue(result.getResponse().getContentAsString(), OstrichError.class);
         assertThat(exceptionResult, hasProperty("code", is(OstrichErrorCode.CODE_09.name())));
         assertThat(exceptionResult, hasProperty("message", is(OstrichErrorCode.CODE_09.getMessage())));
@@ -223,7 +223,7 @@ public class ZooCreateOstrichTests {
         baseOstrich.setName("Invalid Ostrich");
         baseOstrich.setMotherId(UUID.fromString("5afba3a1-96ba-46eb-b9c1-9ac690953fb3"));
         String body = objectMapper.writeValueAsString(baseOstrich);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/ostrich").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/ostrich").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isNotFound()).andReturn();
         OstrichError exceptionResult = objectMapper.readValue(result.getResponse().getContentAsString(), OstrichError.class);
         assertThat(exceptionResult, hasProperty("code", is(OstrichErrorCode.CODE_10.name())));
         assertThat(exceptionResult, hasProperty("message", is(OstrichErrorCode.CODE_10.getMessage())));

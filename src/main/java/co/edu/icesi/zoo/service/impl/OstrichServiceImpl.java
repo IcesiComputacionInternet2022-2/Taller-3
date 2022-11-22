@@ -43,13 +43,13 @@ public class OstrichServiceImpl implements OstrichService {
     
     private void validateFather(Ostrich ostrich) {
 		if(ostrich.getFatherId() != null && ostrichRepository.findById(ostrich.getFatherId()).isEmpty()) {
-			throw new OstrichException(HttpStatus.BAD_REQUEST, new OstrichError(OstrichErrorCode.CODE_09.name(), OstrichErrorCode.CODE_09.getMessage()));
+			throw new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_09.name(), OstrichErrorCode.CODE_09.getMessage()));
 		}
 	}
     
     private void validateMother(Ostrich ostrich) {
     	if(ostrich.getMotherId() != null && ostrichRepository.findById(ostrich.getMotherId()).isEmpty()) {
-			throw new OstrichException(HttpStatus.BAD_REQUEST, new OstrichError(OstrichErrorCode.CODE_10.name(), OstrichErrorCode.CODE_10.getMessage()));
+			throw new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_10.name(), OstrichErrorCode.CODE_10.getMessage()));
 		}
 	}
 
@@ -75,7 +75,7 @@ public class OstrichServiceImpl implements OstrichService {
     	List<Ostrich> ostriches = new ArrayList<>();
     	ostriches.add(ostrichRepository.findByName(ostrichName).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_13.name(), OstrichErrorCode.CODE_13.getMessage()))));
     	if(ostriches.get(0).getFatherId() != null) {
-			ostriches.add(ostrichRepository.findById(ostriches.get(0).getFatherId()).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_10.name(), OstrichErrorCode.CODE_10.getMessage()))));
+			ostriches.add(ostrichRepository.findById(ostriches.get(0).getFatherId()).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_09.name(), OstrichErrorCode.CODE_09.getMessage()))));
 		}
 		if(ostriches.get(0).getMotherId() != null) {
 			ostriches.add(ostrichRepository.findById(ostriches.get(0).getMotherId()).orElseThrow(() -> new OstrichException(HttpStatus.NOT_FOUND, new OstrichError(OstrichErrorCode.CODE_10.name(), OstrichErrorCode.CODE_10.getMessage()))));
